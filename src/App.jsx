@@ -31,6 +31,7 @@ import {
   SiMysql,
   SiExpress,
 } from "react-icons/si";
+import ContactForm from "./ContactForm";
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -2039,111 +2040,7 @@ const ContactSection = ({ theme, id }) => {
               <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-gradient-to-br from-pink-400/20 to-cyan-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
               <div className="relative z-10">
-                <form netlify>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className={`block text-sm font-semibold mb-2 ${
-                          theme === "dark" ? "text-gray-200" : "text-gray-700"
-                        }`}
-                      >
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
-                          theme === "dark"
-                            ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-                            : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-                        } focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className={`block text-sm font-semibold mb-2 ${
-                          theme === "dark" ? "text-gray-200" : "text-gray-700"
-                        }`}
-                      >
-                        Your Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
-                          theme === "dark"
-                            ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-                            : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-                        } focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mb-6">
-                    <label
-                      htmlFor="subject"
-                      className={`block text-sm font-semibold mb-2 ${
-                        theme === "dark" ? "text-gray-200" : "text-gray-700"
-                      }`}
-                    >
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
-                        theme === "dark"
-                          ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-                          : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-                      } focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-                      placeholder="Project Inquiry"
-                    />
-                  </div>
-
-                  <div className="mb-8">
-                    <label
-                      htmlFor="message"
-                      className={`block text-sm font-semibold mb-2 ${
-                        theme === "dark" ? "text-gray-200" : "text-gray-700"
-                      }`}
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows="5"
-                      className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 resize-none ${
-                        theme === "dark"
-                          ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-                          : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-                      } focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-                      placeholder="Your message here..."
-                    ></textarea>
-                  </div>
-
-                  <motion.button
-                    type="submit"
-                    className="relative w-full px-6 py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white font-semibold rounded-xl backdrop-blur-sm border border-indigo-500/20 shadow-2xl overflow-hidden group"
-                    whileHover={{
-                      scale: 1.02,
-                      boxShadow: "0 20px 40px rgba(99, 102, 241, 0.3)",
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {/* Button shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-
-                    <span className="relative z-10">Send Message</span>
-
-                    {/* Button glow effect */}
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"></div>
-                  </motion.button>
-                </form>
+                <ContactForm theme={theme}/>
               </div>
 
               {/* Glass shine effect */}

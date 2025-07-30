@@ -26,7 +26,7 @@ const ContactForm = ({ theme }) => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3001/api/email/send", {
+      const response = await fetch("https://razor-mail-server.vercel.app/api/email/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -284,6 +284,21 @@ const Navbar = ({ toggleTheme, theme, ScrollLink }) => {
                 {link.name}
               </ScrollLink>
             ))}
+
+            <div className="px-3 py-2">
+              <motion.button
+                onClick={toggleTheme}
+                className={`p-2 rounded-md flex items-center justify-center ${
+                  theme === "dark"
+                    ? "bg-gray-800 text-yellow-400"
+                    : "bg-gray-200 text-gray-700"
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {theme === "dark" ? "☀️" : "🌙 "}
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       )}
@@ -513,7 +528,7 @@ const AboutSection = ({ theme, id }) => {
               established companies to build digital products that users love.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div>
                 <div className="flex items-center mb-1">
                   <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
@@ -1061,7 +1076,12 @@ const SkillsSection = ({ theme, id }) => {
     },
     {
       name: "Next.js",
-      icon: <SiNextdotjs className="text-gray-800" size={32} />,
+      icon: (
+        <SiNextdotjs
+          className={`${theme === "dark" ? "text-white" : "text-gray-800"}`}
+          size={32}
+        />
+      ),
       level: 90,
     },
     {
@@ -1076,7 +1096,12 @@ const SkillsSection = ({ theme, id }) => {
     },
     {
       name: "Express.js",
-      icon: <SiExpress className="text-gray-700" size={32} />,
+      icon: (
+        <SiExpress
+          className={`${theme === "dark" ? "text-white" : "text-gray-700"}`}
+          size={32}
+        />
+      ),
       level: 82,
     },
     {
@@ -1231,7 +1256,7 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
       organization: "Cybernetics Pvt Ltd",
       period: "June 2025 - Present",
       description:
-        "Started my internship as a Software Engineer at Cybernetic Pvt Ltd.",
+        "I have commenced my internship as a Software Engineer at Cybernetic Pvt Ltd, where I am actively involved in GitHub repository management, backend development using Laravel, and frontend development with React.js and Next.js. I am also working with Prisma as the ORM, utilizing both MySQL and MongoDB databases. Additionally, I contribute to software testing within the production environment.",
       icon: <FiBriefcase className="text-indigo-500" size={20} />,
     },
     {
@@ -1742,10 +1767,10 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                     ))}
                   </div>
 
-                  <div className="flex gap-4">
+                  <div className="flex gap-2">
                     <motion.a
                       href={project.link}
-                      className={`group/link flex items-center px-4 py-2 rounded-full backdrop-blur-sm border font-medium transition-all duration-300 ${
+                      className={`group/link flex items-center px-3 py-1.5 text-sm rounded-full backdrop-blur-sm border font-medium transition-all duration-300 ${
                         theme === "dark"
                           ? "text-indigo-400 border-indigo-400/30 hover:bg-indigo-400/10 hover:border-indigo-400/50"
                           : "text-indigo-600 border-indigo-600/30 hover:bg-indigo-600/10 hover:border-indigo-600/50"
@@ -1755,7 +1780,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                     >
                       View Project
                       <motion.svg
-                        className="ml-2 w-4 h-4"
+                        className="ml-1.5 w-3 h-3"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -1773,7 +1798,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
 
                     <motion.a
                       href={project.link}
-                      className={`group/link flex items-center px-4 py-2 rounded-full backdrop-blur-sm border font-medium transition-all duration-300 ${
+                      className={`group/link flex items-center px-3 py-1.5 text-sm rounded-full backdrop-blur-sm border font-medium transition-all duration-300 ${
                         theme === "dark"
                           ? "text-gray-400 border-gray-400/30 hover:bg-gray-400/10 hover:border-gray-400/50 hover:text-gray-300"
                           : "text-gray-600 border-gray-600/30 hover:bg-gray-600/10 hover:border-gray-600/50 hover:text-gray-500"
@@ -1783,7 +1808,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                     >
                       Source Code
                       <motion.svg
-                        className="ml-2 w-4 h-4"
+                        className="ml-1.5 w-3 h-3"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

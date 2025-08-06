@@ -105,7 +105,7 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-500 ${
+      className={`min-h-screen overflow-x-hidden transition-colors duration-500 ${
         theme === "dark"
           ? "bg-gray-900 text-white"
           : "bg-gradient-to-br from-indigo-50 to-cyan-50 text-gray-900"
@@ -2040,7 +2040,7 @@ const ContactSection = ({ theme, id }) => {
               <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-gradient-to-br from-pink-400/20 to-cyan-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
               <div className="relative z-10">
-                <ContactForm theme={theme}/>
+                <ContactForm theme={theme} />
               </div>
 
               {/* Glass shine effect */}

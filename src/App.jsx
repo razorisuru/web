@@ -1604,6 +1604,14 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
       image: "/placeholder-image.png",
     },
     {
+      title: "Torrent Search Engine",
+      description:
+        "A premium, fast, and secure torrent search engine built with React and Vite. Instantly discover and grab magnet links with a sleek, modern interface.",
+      tags: ["NodeJS", "ReactJS", "TailwindCSS"],
+      link: "https://torrent.razorisuru.com/",
+      image: "https://raw.githubusercontent.com/razorisuru/razor-torrent-grabber/30f8d024e5c9e5b7c9991493db2f1f47024efdbe/public/og-image.jpg",
+    },
+    {
       title: "To-Do List App (MERN Stack)",
       description:
         "A feature-rich to-do list application developed using the MERN stack (MongoDB, Express.js, React, Node.js). The app offers functionalities such as task creation, updating, and deletion, ensuring seamless task management.",

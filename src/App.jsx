@@ -1273,9 +1273,9 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
     {
       degree: "Bachelor of Science in Information Technology",
       institution: "SIBA CAMPUS (Sri Lanka International Buddhist Academy)",
-      period: "July 2022 – Present",
+      period: "2022 – 2025",
       description:
-        "SIBA Campus is a unique liberal arts higher education institution set in a monastic and eco-friendly environment. Rooted in Buddhist principles, it aims to cultivate local and global leaders with strong academic and ethical foundations.",
+        "Graduated with a First Class Honors degree, achieving a GPA of 3.76, and developed strong skills across modern information technology disciplines.",
       icon: <FiBook className="text-indigo-500" size={20} />,
     },
     {

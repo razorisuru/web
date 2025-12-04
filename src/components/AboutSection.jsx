@@ -39,14 +39,14 @@ const AboutSection = ({ theme, id }) => {
                 theme === "dark" ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              A highly motivated undergraduate student at the Sri Lanka
-              International Buddhist Academy(SIBA Campus), with a strong
-              foundation in software development. Equipped with robust problem
-              solving skills and a passion for creative solutions, gained
-              through extensive self-study and hands-on experience in various
-              technologies. Currently seeking a Software Engineer position to
-              leverage technical expertise and contribute to innovative
-              projects.
+              I am a Software Engineer with a BSc in Information Technology,
+              graduating with a GPA of 3.76. I focus on developing efficient,
+              scalable, and user-friendly software solutions, backed by strong
+              problem-solving skills and practical experience across multiple
+              technologies. My work spans web development, mobile apps, UI/UX
+              design, and AI-integrated systems. I am passionate about
+              continuous improvement and delivering meaningful digital
+              experiences.
             </p>
             <p
               className={`mb-6 ${

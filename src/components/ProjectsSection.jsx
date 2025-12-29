@@ -62,24 +62,30 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
               <div className="absolute -bottom-12 -left-12 w-20 h-20 bg-gradient-to-br from-pink-400/20 to-cyan-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
               <div className="relative z-10">
-                {/* Image container with enhanced glass effect */}
+                {/* Image container - takes up half the card */}
                 <div className="relative overflow-hidden">
-                  <div className="w-full h-48 relative">
+                  <div className="w-full h-56 md:h-64 relative">
                     <img
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    {/* Image overlay with glass effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    {/* Fade gradient at bottom of image */}
+                    <div
+                      className={`absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t ${
+                        theme === "dark"
+                          ? "from-gray-900/95 via-gray-900/60 to-transparent"
+                          : "from-white/95 via-white/60 to-transparent"
+                      }`}
+                    ></div>
                     {/* Glass reflection on image */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-4 pt-2">
                   <h3
-                    className={`text-xl font-bold mb-3 transition-all duration-300 ${
+                    className={`text-base font-semibold mb-1.5 transition-all duration-300 ${
                       theme === "dark" ? "text-white" : "text-gray-800"
                     } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:to-purple-500 group-hover:bg-clip-text`}
                   >
@@ -87,85 +93,94 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                   </h3>
 
                   <p
-                    className={`mb-6 leading-relaxed transition-all duration-300 ${
-                      theme === "dark" ? "text-gray-300" : "text-gray-600"
-                    } group-hover:text-opacity-90`}
+                    className={`text-sm mb-3 line-clamp-2 leading-snug transition-all duration-300 ${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
                   >
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag, tagIndex) => (
-                      <motion.span
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {project.tags.slice(0, 4).map((tag, tagIndex) => (
+                      <span
                         key={tagIndex}
-                        className={`px-3 py-1 text-sm rounded-full backdrop-blur-sm border transition-all duration-300 ${
+                        className={`px-2 py-0.5 text-xs rounded-md font-medium transition-all duration-300 ${
                           theme === "dark"
-                            ? "bg-white/5 border-white/10 text-indigo-400 hover:bg-white/10 hover:border-indigo-400/30"
-                            : "bg-white/20 border-white/20 text-indigo-600 hover:bg-white/30 hover:border-indigo-600/30"
+                            ? "bg-indigo-500/10 text-indigo-400"
+                            : "bg-indigo-500/10 text-indigo-600"
                         }`}
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.2 }}
                       >
                         {tag}
-                      </motion.span>
+                      </span>
                     ))}
+                    {project.tags.length > 4 && (
+                      <span
+                        className={`px-2 py-0.5 text-xs rounded-md font-medium ${
+                          theme === "dark"
+                            ? "bg-gray-500/10 text-gray-400"
+                            : "bg-gray-500/10 text-gray-500"
+                        }`}
+                      >
+                        +{project.tags.length - 4}
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex gap-2">
                     <motion.a
                       href={project.link}
-                      className={`group/link flex items-center px-3 py-1.5 text-sm rounded-full backdrop-blur-sm border font-medium transition-all duration-300 ${
+                      className={`flex items-center px-3 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
                         theme === "dark"
-                          ? "text-indigo-400 border-indigo-400/30 hover:bg-indigo-400/10 hover:border-indigo-400/50"
-                          : "text-indigo-600 border-indigo-600/30 hover:bg-indigo-600/10 hover:border-indigo-600/50"
+                          ? "bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30"
+                          : "bg-indigo-500/20 text-indigo-600 hover:bg-indigo-500/30"
                       }`}
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      View Project
-                      <motion.svg
-                        className="ml-1.5 w-3 h-3"
+                      <svg
+                        className="mr-1.5 w-3.5 h-3.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        whileHover={{ x: 3 }}
-                        transition={{ duration: 0.2 }}
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                         ></path>
-                      </motion.svg>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        ></path>
+                      </svg>
+                      Preview
                     </motion.a>
 
                     <motion.a
                       href={project.source}
-                      className={`group/link flex items-center px-3 py-1.5 text-sm rounded-full backdrop-blur-sm border font-medium transition-all duration-300 ${
+                      className={`flex items-center px-3 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
                         theme === "dark"
-                          ? "text-gray-400 border-gray-400/30 hover:bg-gray-400/10 hover:border-gray-400/50 hover:text-gray-300"
-                          : "text-gray-600 border-gray-600/30 hover:bg-gray-600/10 hover:border-gray-600/50 hover:text-gray-500"
+                          ? "bg-gray-500/20 text-gray-400 hover:bg-gray-500/30"
+                          : "bg-gray-500/20 text-gray-600 hover:bg-gray-500/30"
                       }`}
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      Source Code
-                      <motion.svg
-                        className="ml-1.5 w-3 h-3"
-                        fill="none"
-                        stroke="currentColor"
+                      <svg
+                        className="mr-1.5 w-3.5 h-3.5"
+                        fill="currentColor"
                         viewBox="0 0 24 24"
-                        whileHover={{ x: 3 }}
-                        transition={{ duration: 0.2 }}
                       >
                         <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                          fillRule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clipRule="evenodd"
                         ></path>
-                      </motion.svg>
+                      </svg>
+                      Source
                     </motion.a>
                   </div>
                 </div>

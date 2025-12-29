@@ -141,7 +141,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                     </motion.a>
 
                     <motion.a
-                      href={project.link}
+                      href={project.source}
                       className={`group/link flex items-center px-3 py-1.5 text-sm rounded-full backdrop-blur-sm border font-medium transition-all duration-300 ${
                         theme === "dark"
                           ? "text-gray-400 border-gray-400/30 hover:bg-gray-400/10 hover:border-gray-400/50 hover:text-gray-300"

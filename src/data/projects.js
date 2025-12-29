@@ -52,12 +52,12 @@ export const allProjects = [
   {
     title: "Web Application for Ceylon Sapphire",
     description:
-      "A feature-rich to-do list application developed using the MERN stack (MongoDB, Express.js, React, Node.js). The app offers functionalities such as task creation, updating, and deletion, ensuring seamless task management.",
+      "Developed a premium gemstone wholesaler platform featuring product listings, inventory management, and customer engagement using Next.js, React, DrizzleORM, and PostgreSQL. Built with modern full-stack architecture and optimized for global trade professionals.",
     tags: ["NextJS", "ReactJS", "ReactDOM", "DrizzleORM"],
     link: "https://gem.razorisuru.com/",
     source: "https://github.com/razorisuru/gem-dev",
     image:
-      "https://media.geeksforgeeks.org/wp-content/uploads/20240803123607/todolist-mern.png",
+      "https://raw.githubusercontent.com/razorisuru/web/refs/heads/main/public/gem.png",
   },
   {
     title: "To-Do List App (MERN Stack)",

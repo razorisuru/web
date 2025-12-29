@@ -5,16 +5,27 @@ import { FiBriefcase, FiBook } from "react-icons/fi";
 const ResumeSection = ({ theme, id, ScrollLink }) => {
   const workExperience = [
     {
-      title: "Software Engineer Intern",
-      organization: "Cybernetics Pvt Ltd",
-      period: "June 2025 - Present",
+      title: "Associate Software Engineer",
+      organization: "Cybernetic Technologies (Pvt) Ltd",
+      url: "https://cybernetic.lk",
+      period: "Dec 2025 – Present",
       description:
-        "I have commenced my internship as a Software Engineer at Cybernetic Pvt Ltd, where I am actively involved in GitHub repository management, backend development using Laravel, and frontend development with React.js and Next.js. I am also working with Prisma as the ORM, utilizing both MySQL and MongoDB databases. Additionally, I contribute to software testing within the production environment.",
+        "Develop and enhance full-stack web and mobile applications using modern frameworks. Contribute to system enhancements, API development, and database integration while collaborating with cross-functional teams to deliver scalable, production-ready solutions.",
+      icon: <FiBriefcase className="text-indigo-500" size={20} />,
+    },
+    {
+      title: "Intern Software Engineer",
+      organization: "Cybernetic Technologies (Pvt) Ltd",
+      url: "https://cybernetic.lk",
+      period: "Jun 2025 – Dec 2025",
+      description:
+        "Built and maintained client-based web applications using PHP, JavaScript, HTML, CSS, and MySQL. Assisted in debugging, testing, and performance optimization while participating in code reviews, technical discussions, and system demonstrations, leading to promotion upon completion.",
       icon: <FiBriefcase className="text-indigo-500" size={20} />,
     },
     {
       title: "Peer Tutor",
-      organization: "SIBA Campus (5st Lanka International Buddhist Academy)",
+      organization: "SIBA Campus (Sri Lanka International Buddhist Academy)",
+      url: "https://siba.edu.lk",
       period: "Oct 2024 - 2025",
       description:
         "Started my internship as a peer tutor at my campus, where I assist lecturers with teaching and guide students to achieve a deeper understanding of their subjects.",
@@ -34,7 +45,7 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
     {
       degree: "Ordinary Level & Advanced Level",
       institution: "Kurunduwaththa Royal College",
-      period: "2016 – 2019",
+      period: "2015 – 2019",
       description:
         "A multicultural institution that promotes the free exchange of ideas and diversity. Known for its rich traditions and innovative approach to excellence in education.",
       icon: <FiBook className="text-indigo-500" size={20} />,
@@ -156,9 +167,9 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
                         >
                           {job.title}
                         </h4>
-                        <p className="text-indigo-500 font-semibold">
+                        <a href={job.url} className="text-indigo-500 font-semibold" target="_blank" rel="noopener noreferrer">
                           {job.organization}
-                        </p>
+                        </a>
                       </div>
                     </div>
 

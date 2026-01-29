@@ -29,7 +29,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {projectsToShow.map((project, index) => (
             <motion.div
               key={index}
@@ -43,9 +43,9 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{
-                y: -15,
+                y: -8,
                 scale: 1.02,
-                transition: { duration: 0.4, ease: "easeOut" },
+                transition: { duration: 0.3, ease: "easeOut" },
               }}
             >
               {/* Animated gradient border */}
@@ -64,7 +64,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
               <div className="relative z-10">
                 {/* Image container - takes up half the card */}
                 <div className="relative overflow-hidden">
-                  <div className="w-full h-56 md:h-64 relative">
+                    <div className="w-full h-48 md:h-56 lg:h-48 relative">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -101,7 +101,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                   </p>
 
                   <div className="flex flex-wrap gap-1.5 mb-3">
-                    {project.tags.slice(0, 4).map((tag, tagIndex) => (
+                    {project.tags.slice(0, 3).map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
                         className={`px-2 py-0.5 text-xs rounded-md font-medium transition-all duration-300 ${
@@ -113,7 +113,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                         {tag}
                       </span>
                     ))}
-                    {project.tags.length > 4 && (
+                    {project.tags.length > 3 && (
                       <span
                         className={`px-2 py-0.5 text-xs rounded-md font-medium ${
                           theme === "dark"
@@ -121,7 +121,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                             : "bg-gray-500/10 text-gray-500"
                         }`}
                       >
-                        +{project.tags.length - 4}
+                        +{project.tags.length - 3}
                       </span>
                     )}
                   </div>

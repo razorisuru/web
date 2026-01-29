@@ -16,8 +16,17 @@ import ScrollLink from "./components/ScrollLink";
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "dark";
+    }
+    return "dark";
+  });
   const [visibleProjects, setVisibleProjects] = useState(6); // Show 6 projects initially
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,6 +79,7 @@ function App() {
       {showScrollTop && (
         <motion.button
           onClick={scrollToTop}
+          aria-label="Scroll to top"
           className="fixed bottom-8 right-8 p-3 rounded-full bg-indigo-600 text-white shadow-lg z-50"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}

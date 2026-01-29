@@ -68,6 +68,7 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     {/* Fade gradient at bottom of image */}
@@ -129,6 +130,8 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
                   <div className="flex gap-2">
                     <motion.a
                       href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`flex items-center px-3 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
                         theme === "dark"
                           ? "bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30"
@@ -161,6 +164,8 @@ const ProjectsSection = ({ theme, id, visibleProjects, loadMoreProjects }) => {
 
                     <motion.a
                       href={project.source}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`flex items-center px-3 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
                         theme === "dark"
                           ? "bg-gray-500/20 text-gray-400 hover:bg-gray-500/30"

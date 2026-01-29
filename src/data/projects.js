@@ -1,5 +1,3 @@
-import { source } from "framer-motion/client";
-
 export const allProjects = [
   {
     title: "Learning Materials Management System",

@@ -17,7 +17,7 @@ import ScrollLink from "./components/ScrollLink";
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [theme, setTheme] = useState("dark");
-  const [visibleProjects, setVisibleProjects] = useState(4); // Show 4 projects initially
+  const [visibleProjects, setVisibleProjects] = useState(6); // Show 6 projects initially
 
   useEffect(() => {
     const handleScroll = () => {

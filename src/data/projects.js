@@ -31,6 +31,15 @@ export const allProjects = [
     image: "/upride.png",
   },
   {
+    title: "Next Blogger",
+    description:
+      "A modern, full-featured blogging platform built with Next.js 16, featuring role-based access control (RBAC), user authentication, and a beautiful responsive UI.",
+    tags: ["NextJS", "PrismaORM", "ReactJS", "PostgreSQL"],
+    link: "https://nextblog.razorisuru.com/",
+    source: "https://github.com/razorisuru/role-based-post-management-system-nextjs",
+    image: "/nextBlog.png",
+  },
+  {
     title: "HRM System",
     description:
       "A fully featured HRM application built using Next.js, React.js, Prisma ORM, and MySQL, developed following clean architecture and modern development principles. The system includes role-based access, employee management, attendance tracking, and streamlined administrative workflows. Designed with scalability, maintainability, and performance in mind, this application showcases efficient backend logic, optimized database operations, and a smooth, intuitive user experience.",

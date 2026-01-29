@@ -14,18 +14,19 @@ const SkillsSection = ({ theme, id }) => {
         <div className="text-center mb-16">
           <motion.div
             className="inline-block text-indigo-500 font-medium mb-2"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.25 }}
           >
             My Skills
           </motion.div>
           <motion.h2
             className="text-3xl md:text-4xl font-bold"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.05, duration: 0.25 }}
           >
             Technical Expertise
           </motion.h2>
@@ -35,23 +36,23 @@ const SkillsSection = ({ theme, id }) => {
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-300 cursor-pointer ${
+              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-200 cursor-pointer ${
                 theme === "dark"
                   ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                   : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
               } shadow-2xl hover:shadow-3xl hover:scale-105`}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
               whileHover={{
                 y: -8,
-                transition: { duration: 0.3 },
+                transition: { duration: 0.15 },
               }}
             >
               {/* Glowing border effect */}
               <div
-                className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${
+                className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r ${
                   skill.color || "from-indigo-500 to-purple-500"
                 } p-[1px]`}
               >
@@ -67,7 +68,7 @@ const SkillsSection = ({ theme, id }) => {
                   <motion.div
                     className={`mr-3 p-2 rounded-xl  text-gray shadow-lg`}
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.15 }}
                   >
                     {skill.needsTheme ? skill.icon(theme) : skill.icon}
                   </motion.div>
@@ -92,7 +93,7 @@ const SkillsSection = ({ theme, id }) => {
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
                   >
                     {/* Shimmer effect */}
                     <motion.div
@@ -118,7 +119,7 @@ const SkillsSection = ({ theme, id }) => {
               </div>
 
               {/* Glass reflection effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" />
             </motion.div>
           ))}
         </div>

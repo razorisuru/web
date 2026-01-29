@@ -8,18 +8,19 @@ const AboutSection = ({ theme, id }) => {
         <div className="text-center mb-16">
           <motion.div
             className="inline-block text-indigo-500 font-medium mb-2"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.25 }}
           >
             About Me
           </motion.div>
           <motion.h2
             className="text-3xl md:text-4xl font-bold"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.05, duration: 0.25 }}
           >
             My Journey
           </motion.h2>
@@ -28,10 +29,10 @@ const AboutSection = ({ theme, id }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <motion.div
             className="lg:col-span-2"
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.4 }}
           >
             <h3 className="text-xl font-bold mb-4">Who I Am</h3>
             <p
@@ -127,13 +128,13 @@ const AboutSection = ({ theme, id }) => {
 
           <motion.div
             className="flex flex-col gap-8"
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
             <motion.div
-              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-500 overflow-hidden cursor-pointer ${
+              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-200 overflow-hidden cursor-pointer ${
                 theme === "dark"
                   ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                   : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
@@ -141,11 +142,11 @@ const AboutSection = ({ theme, id }) => {
               whileHover={{
                 scale: 1.05,
                 y: -5,
-                transition: { duration: 0.3 },
+                transition: { duration: 0.15 },
               }}
             >
               {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 p-[1px]">
+              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 p-[1px]">
                 <div
                   className={`w-full h-full rounded-3xl ${
                     theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
@@ -154,19 +155,19 @@ const AboutSection = ({ theme, id }) => {
               </div>
 
               {/* Floating background orb */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-indigo-400/30 to-purple-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-indigo-400/30 to-purple-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
 
               <div className="relative z-10">
                 <motion.div
-                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300"
+                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-200"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
                 >
                   50+
                 </motion.div>
                 <h4
-                  className={`text-lg font-semibold mb-1 transition-all duration-300 ${
+                  className={`text-lg font-semibold mb-1 transition-all duration-200 ${
                     theme === "dark" ? "text-white" : "text-gray-800"
                   } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:to-purple-500 group-hover:bg-clip-text`}
                 >
@@ -175,18 +176,18 @@ const AboutSection = ({ theme, id }) => {
                 <p
                   className={`text-sm ${
                     theme === "dark" ? "text-gray-400" : "text-gray-500"
-                  } group-hover:text-opacity-90 transition-all duration-300`}
+                  } group-hover:text-opacity-90 transition-all duration-200`}
                 >
                   Websites, apps, and designs
                 </p>
               </div>
 
               {/* Glass shine effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
-              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-500 overflow-hidden cursor-pointer ${
+              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-200 overflow-hidden cursor-pointer ${
                 theme === "dark"
                   ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                   : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
@@ -194,11 +195,11 @@ const AboutSection = ({ theme, id }) => {
               whileHover={{
                 scale: 1.05,
                 y: -5,
-                transition: { duration: 0.3 },
+                transition: { duration: 0.15 },
               }}
             >
               {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 p-[1px]">
+              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 p-[1px]">
                 <div
                   className={`w-full h-full rounded-3xl ${
                     theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
@@ -207,19 +208,19 @@ const AboutSection = ({ theme, id }) => {
               </div>
 
               {/* Floating background orb */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
 
               <div className="relative z-10">
                 <motion.div
-                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300"
+                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-200"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
                 >
                   15+
                 </motion.div>
                 <h4
-                  className={`text-lg font-semibold mb-1 transition-all duration-300 ${
+                  className={`text-lg font-semibold mb-1 transition-all duration-200 ${
                     theme === "dark" ? "text-white" : "text-gray-800"
                   } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:bg-clip-text`}
                 >
@@ -228,18 +229,18 @@ const AboutSection = ({ theme, id }) => {
                 <p
                   className={`text-sm ${
                     theme === "dark" ? "text-gray-400" : "text-gray-500"
-                  } group-hover:text-opacity-90 transition-all duration-300`}
+                  } group-hover:text-opacity-90 transition-all duration-200`}
                 >
                   Worldwide satisfaction
                 </p>
               </div>
 
               {/* Glass shine effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
-              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-500 overflow-hidden cursor-pointer ${
+              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-200 overflow-hidden cursor-pointer ${
                 theme === "dark"
                   ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                   : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
@@ -247,11 +248,11 @@ const AboutSection = ({ theme, id }) => {
               whileHover={{
                 scale: 1.05,
                 y: -5,
-                transition: { duration: 0.3 },
+                transition: { duration: 0.15 },
               }}
             >
               {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-500 p-[1px]">
+              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-500 p-[1px]">
                 <div
                   className={`w-full h-full rounded-3xl ${
                     theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
@@ -260,19 +261,19 @@ const AboutSection = ({ theme, id }) => {
               </div>
 
               {/* Floating background orb */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-cyan-400/30 to-blue-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-cyan-400/30 to-blue-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
 
               <div className="relative z-10">
                 <motion.div
-                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300"
+                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-200"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
+                  transition={{ duration: 0.4, delay: 0.25 }}
                 >
                   5+
                 </motion.div>
                 <h4
-                  className={`text-lg font-semibold mb-1 transition-all duration-300 ${
+                  className={`text-lg font-semibold mb-1 transition-all duration-200 ${
                     theme === "dark" ? "text-white" : "text-gray-800"
                   } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-500 group-hover:bg-clip-text`}
                 >
@@ -281,14 +282,14 @@ const AboutSection = ({ theme, id }) => {
                 <p
                   className={`text-sm ${
                     theme === "dark" ? "text-gray-400" : "text-gray-500"
-                  } group-hover:text-opacity-90 transition-all duration-300`}
+                  } group-hover:text-opacity-90 transition-all duration-200`}
                 >
                   Building digital products
                 </p>
               </div>
 
               {/* Glass shine effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
             </motion.div>
           </motion.div>
         </div>

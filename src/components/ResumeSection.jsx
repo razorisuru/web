@@ -58,18 +58,19 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
         <div className="text-center mb-16">
           <motion.div
             className="inline-block text-indigo-500 font-medium mb-2"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.25 }}
           >
             My Credentials
           </motion.div>
           <motion.h2
             className="text-3xl md:text-4xl font-bold"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.05, duration: 0.25 }}
           >
             Resume
           </motion.h2>
@@ -78,20 +79,20 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Work Experience Column */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.4 }}
           >
             <div className="flex items-center mb-8">
               <motion.div
-                className={`p-4 rounded-2xl backdrop-blur-sm border transition-all duration-300 ${
+                className={`p-4 rounded-2xl backdrop-blur-sm border transition-all duration-200 ${
                   theme === "dark"
                     ? "bg-white/5 border-white/10 text-indigo-400"
                     : "bg-white/20 border-white/20 text-indigo-600"
                 } mr-4 shadow-lg`}
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.15 }}
               >
                 <FiBriefcase size={24} />
               </motion.div>
@@ -111,22 +112,22 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
               {workExperience.map((job, index) => (
                 <motion.div
                   key={index}
-                  className={`group relative mb-10 rounded-3xl p-6 backdrop-blur-lg border transition-all duration-500 overflow-hidden ${
+                  className={`group relative mb-10 rounded-3xl p-6 backdrop-blur-lg border transition-all duration-200 overflow-hidden ${
                     theme === "dark"
                       ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                       : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
                   } shadow-2xl hover:shadow-3xl`}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
                   whileHover={{
                     x: 10,
-                    transition: { duration: 0.3 },
+                    transition: { duration: 0.15 },
                   }}
                 >
                   {/* Animated gradient border */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
                     <div
                       className={`w-full h-full rounded-3xl ${
                         theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
@@ -135,13 +136,13 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
                   </div>
 
                   {/* Floating background orbs */}
-                  <div className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
 
                   {/* Enhanced timeline dot */}
                   <motion.div
                     className="absolute -left-[2.75rem] top-6 w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center shadow-lg"
                     whileHover={{ scale: 1.2 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.15 }}
                   >
                     <div className="w-3 h-3 bg-white rounded-full"></div>
                   </motion.div>
@@ -155,13 +156,13 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
                             : "bg-white/20 border-white/20"
                         }`}
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.15 }}
                       >
                         {job.icon}
                       </motion.div>
                       <div className="ml-4">
                         <h4
-                          className={`text-xl font-bold transition-all duration-300 ${
+                          className={`text-xl font-bold transition-all duration-200 ${
                             theme === "dark" ? "text-white" : "text-gray-800"
                           } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:to-purple-500 group-hover:bg-clip-text`}
                         >
@@ -186,14 +187,14 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
                     <p
                       className={`leading-relaxed ${
                         theme === "dark" ? "text-gray-300" : "text-gray-600"
-                      } group-hover:text-opacity-90 transition-all duration-300`}
+                      } group-hover:text-opacity-90 transition-all duration-200`}
                     >
                       {job.description}
                     </p>
                   </div>
 
                   {/* Glass shine effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
                 </motion.div>
               ))}
             </div>
@@ -201,20 +202,20 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
 
           {/* Education Column */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
             <div className="flex items-center mb-8">
               <motion.div
-                className={`p-4 rounded-2xl backdrop-blur-sm border transition-all duration-300 ${
+                className={`p-4 rounded-2xl backdrop-blur-sm border transition-all duration-200 ${
                   theme === "dark"
                     ? "bg-white/5 border-white/10 text-indigo-400"
                     : "bg-white/20 border-white/20 text-indigo-600"
                 } mr-4 shadow-lg`}
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.15 }}
               >
                 <FiBook size={24} />
               </motion.div>
@@ -234,22 +235,22 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
               {education.map((edu, index) => (
                 <motion.div
                   key={index}
-                  className={`group relative mb-10 rounded-3xl p-6 backdrop-blur-lg border transition-all duration-500 overflow-hidden ${
+                  className={`group relative mb-10 rounded-3xl p-6 backdrop-blur-lg border transition-all duration-200 overflow-hidden ${
                     theme === "dark"
                       ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                       : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
                   } shadow-2xl hover:shadow-3xl`}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
                   whileHover={{
                     x: -10,
-                    transition: { duration: 0.3 },
+                    transition: { duration: 0.15 },
                   }}
                 >
                   {/* Animated gradient border */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
                     <div
                       className={`w-full h-full rounded-3xl ${
                         theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
@@ -258,13 +259,13 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
                   </div>
 
                   {/* Floating background orbs */}
-                  <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
 
                   {/* Enhanced timeline dot */}
                   <motion.div
                     className="absolute -left-[2.75rem] top-6 w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center shadow-lg"
                     whileHover={{ scale: 1.2 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.15 }}
                   >
                     <div className="w-3 h-3 bg-white rounded-full"></div>
                   </motion.div>
@@ -278,13 +279,13 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
                             : "bg-white/20 border-white/20"
                         }`}
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.15 }}
                       >
                         {edu.icon}
                       </motion.div>
                       <div className="ml-4">
                         <h4
-                          className={`text-xl font-bold transition-all duration-300 ${
+                          className={`text-xl font-bold transition-all duration-200 ${
                             theme === "dark" ? "text-white" : "text-gray-800"
                           } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:bg-clip-text`}
                         >
@@ -309,14 +310,14 @@ const ResumeSection = ({ theme, id, ScrollLink }) => {
                     <p
                       className={`leading-relaxed ${
                         theme === "dark" ? "text-gray-300" : "text-gray-600"
-                      } group-hover:text-opacity-90 transition-all duration-300`}
+                      } group-hover:text-opacity-90 transition-all duration-200`}
                     >
                       {edu.description}
                     </p>
                   </div>
 
                   {/* Glass shine effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
                 </motion.div>
               ))}
             </div>

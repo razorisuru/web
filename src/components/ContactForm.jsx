@@ -164,7 +164,7 @@ if (isSuccess) {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
+            className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 ${
               theme === "dark"
                 ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
                 : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
@@ -194,7 +194,7 @@ if (isSuccess) {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
+            className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 ${
               theme === "dark"
                 ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
                 : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
@@ -226,7 +226,7 @@ if (isSuccess) {
           name="subject"
           value={formData.subject}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
+          className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 ${
             theme === "dark"
               ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
               : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
@@ -257,7 +257,7 @@ if (isSuccess) {
           rows="5"
           value={formData.message}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-300 resize-none ${
+          className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 resize-none ${
             theme === "dark"
               ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
               : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
@@ -349,7 +349,7 @@ if (isSuccess) {
           )}
         </span>
 
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"></div>
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-200 blur-xl"></div>
       </motion.button>
     </form>
   );

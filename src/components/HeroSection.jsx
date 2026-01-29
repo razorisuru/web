@@ -8,9 +8,9 @@ const HeroSection = ({ theme, id }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.4 }}
           >
             <div className="text-sm font-medium text-indigo-500 mb-2">
               Hello, I'm
@@ -77,15 +77,15 @@ const HeroSection = ({ theme, id }) => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="relative"
           >
             <div className="relative group">
               {/* Enhanced glowing background */}
               <div
-                className={`absolute inset-0 rounded-3xl blur-2xl transition-all duration-500 ${
+                className={`absolute inset-0 rounded-3xl blur-2xl transition-all duration-300 ${
                   theme === "dark"
                     ? "bg-gradient-to-br from-indigo-500/30 via-purple-500/20 to-pink-500/30"
                     : "bg-gradient-to-br from-indigo-300/40 via-purple-300/30 to-pink-300/40"
@@ -94,7 +94,7 @@ const HeroSection = ({ theme, id }) => {
 
               {/* Secondary glow layer */}
               <div
-                className={`absolute inset-0 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700 ${
+                className={`absolute inset-0 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-300 ${
                   theme === "dark"
                     ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20"
                     : "bg-gradient-to-r from-cyan-300/30 to-blue-300/30"
@@ -102,14 +102,14 @@ const HeroSection = ({ theme, id }) => {
               ></div>
 
               <div
-                className={`relative rounded-3xl overflow-hidden backdrop-blur-lg border transition-all duration-500 ${
+                className={`relative rounded-3xl overflow-hidden backdrop-blur-lg border transition-all duration-300 ${
                   theme === "dark"
                     ? "bg-white/5 border-white/10 hover:border-white/20"
                     : "bg-white/20 border-white/30 hover:border-white/40"
                 } shadow-2xl hover:shadow-3xl group-hover:scale-[1.02]`}
               >
                 {/* Animated gradient border */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
                   <div
                     className={`w-full h-full rounded-3xl ${
                       theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
@@ -118,28 +118,28 @@ const HeroSection = ({ theme, id }) => {
                 </div>
 
                 {/* Floating orbs inside container */}
-                <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-indigo-400/30 to-purple-400/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-pink-400/30 to-cyan-400/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-indigo-400/30 to-purple-400/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-pink-400/30 to-cyan-400/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                 <div className="relative z-10 rounded-3xl w-full h-80 md:h-96 overflow-hidden">
                   <img
                     src="/hero-bg.jpg"
                     alt="Hero background"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
 
                   {/* Image overlay effects */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   {/* Glass reflection on image */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 </div>
 
                 {/* Glass shine effect on container */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
             </div>
 
@@ -149,9 +149,9 @@ const HeroSection = ({ theme, id }) => {
                   ? "bg-gray-800/80 border-gray-700"
                   : "bg-white/80 border-gray-200"
               } border shadow-lg`}
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
+              transition={{ delay: 0.4, duration: 0.3 }}
             >
               <div className="flex items-center">
                 <div className="bg-green-500 rounded-full h-5 w-5 mr-2"></div>

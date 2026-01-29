@@ -23,18 +23,19 @@ const ServicesSection = ({ theme, id, ScrollLink }) => {
         <div className="text-center mb-16">
           <motion.div
             className="inline-block text-indigo-500 font-medium mb-2"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.25 }}
           >
             What I Do
           </motion.div>
           <motion.h2
             className="text-3xl md:text-4xl font-bold"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.05, duration: 0.25 }}
           >
             My Services
           </motion.h2>
@@ -44,22 +45,22 @@ const ServicesSection = ({ theme, id, ScrollLink }) => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className={`group relative p-8 rounded-3xl backdrop-blur-lg border transition-all duration-500 ${
+              className={`group relative p-8 rounded-3xl backdrop-blur-lg border transition-all duration-200 ${
                 theme === "dark"
                   ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                   : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
               } shadow-2xl hover:shadow-3xl`}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
               whileHover={{
                 y: -10,
-                transition: { duration: 0.3 },
+                transition: { duration: 0.15 },
               }}
             >
               {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
+              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[1px]">
                 <div
                   className={`w-full h-full rounded-3xl ${
                     theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
@@ -68,7 +69,7 @@ const ServicesSection = ({ theme, id, ScrollLink }) => {
               </div>
 
               {/* Floating background orb */}
-              <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
 
               <div className="relative z-10">
                 <motion.div
@@ -78,13 +79,13 @@ const ServicesSection = ({ theme, id, ScrollLink }) => {
                       : "bg-white/20 border-white/20"
                   }`}
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   {service.icon}
                 </motion.div>
 
                 <h3
-                  className={`text-2xl font-bold mb-4 transition-all duration-300 ${
+                  className={`text-2xl font-bold mb-4 transition-all duration-200 ${
                     theme === "dark" ? "text-white" : "text-gray-800"
                   } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:to-purple-500 group-hover:bg-clip-text`}
                 >
@@ -94,14 +95,14 @@ const ServicesSection = ({ theme, id, ScrollLink }) => {
                 <p
                   className={`leading-relaxed ${
                     theme === "dark" ? "text-gray-300" : "text-gray-600"
-                  } group-hover:text-opacity-90 transition-all duration-300`}
+                  } group-hover:text-opacity-90 transition-all duration-200`}
                 >
                   {service.description}
                 </p>
               </div>
 
               {/* Glass shine effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
             </motion.div>
           ))}
         </div>
@@ -122,7 +123,7 @@ const ServicesSection = ({ theme, id, ScrollLink }) => {
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
                 whileHover={{ scale: 1.1 }}
               >
                 <div className="text-3xl md:text-4xl font-bold text-indigo-500 mb-2">

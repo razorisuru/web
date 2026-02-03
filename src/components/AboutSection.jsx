@@ -74,13 +74,7 @@ const AboutSection = ({ theme, id }) => {
                 </div>
                 <p>isurubandara318@gmail.com</p>
               </div>
-              <div>
-                <div className="flex items-center mb-1">
-                  <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
-                  <span className="font-medium">Birth Date:</span>
-                </div>
-                <p>January 08, 2001</p>
-              </div>
+              
               <div>
                 <div className="flex items-center mb-1">
                   <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
@@ -95,19 +89,15 @@ const AboutSection = ({ theme, id }) => {
                 </div>
                 <p>Kandy, Sri Lanka</p>
               </div>
-              <div>
-                <div className="flex items-center mb-1">
-                  <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
-                  <span className="font-medium">Availability:</span>
-                </div>
-                <p>Full-time / Freelance</p>
-              </div>
+             
             </div>
 
             <motion.a
               href="/isuru-bandara-cv.pdf"
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
               whileHover={{ x: 10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              target="_blank"
             >
               Download CV
               <svg

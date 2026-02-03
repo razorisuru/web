@@ -49,7 +49,7 @@ function App() {
   };
 
   const loadMoreProjects = () => {
-    setVisibleProjects((prev) => prev + 4); // Load 4 more projects
+    setVisibleProjects((prev) => prev + 6); // Load 6 more projects
   };
 
   return (

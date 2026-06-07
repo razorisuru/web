@@ -9,7 +9,7 @@ import {
 } from "react-icons/fi";
 import ScrollLink from "./ScrollLink";
 
-const Footer = ({ ScrollLink: PropScrollLink }) => {
+const Footer = ({ ScrollLink: PropScrollLink, theme }) => {
   const currentYear = new Date().getFullYear();
   // Use passed ScrollLink or import it if not passed (though here we import it to be safe, but App passes it too)
   // Actually App passes ScrollLink to Footer, but we can also use the imported one if we want to be self-contained.
@@ -23,7 +23,7 @@ const Footer = ({ ScrollLink: PropScrollLink }) => {
   // Let's use the imported one for better modularity.
 
   return (
-    <footer className="py-8 border-t border-gray-800">
+    <footer className={`py-8 border-t ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="text-center md:text-left mb-4 md:mb-0">
@@ -36,7 +36,7 @@ const Footer = ({ ScrollLink: PropScrollLink }) => {
                 />
               </ScrollLink>
             </div>
-            <p className="text-sm text-gray-500">
+            <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
               © {currentYear} Isuru Bandara. All rights reserved.
             </p>
           </div>
@@ -45,42 +45,42 @@ const Footer = ({ ScrollLink: PropScrollLink }) => {
             <a
               href="https://github.com/razorisuru"
               target="_blank"
-              className="text-gray-500 hover:text-indigo-500"
+              className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} hover:text-indigo-500`}
             >
               <FiGithub size={20} />
             </a>
             <a
               href="https://www.linkedin.com/in/razor-isuru/"
               target="_blank"
-              className="text-gray-500 hover:text-indigo-500"
+              className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} hover:text-indigo-500`}
             >
               <FiLinkedin size={20} />
             </a>
             <a
               href="https://twitter.com/razorisuru"
               target="_blank"
-              className="text-gray-500 hover:text-indigo-500"
+              className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} hover:text-indigo-500`}
             >
               <FiTwitter size={20} />
             </a>
             <a
               href="https://www.youtube.com/@razor_dev"
               target="_blank"
-              className="text-gray-500 hover:text-indigo-500"
+              className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} hover:text-indigo-500`}
             >
               <FiYoutube size={20} />
             </a>
             <a
               href="https://www.facebook.com/razor.isuru"
               target="_blank"
-              className="text-gray-500 hover:text-indigo-500"
+              className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} hover:text-indigo-500`}
             >
               <FiFacebook size={20} />
             </a>
             <a
               href="https://www.instagram.com/razor_isuru"
               target="_blank"
-              className="text-gray-500 hover:text-indigo-500"
+              className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} hover:text-indigo-500`}
             >
               <FiInstagram size={20} />
             </a>

@@ -1,10 +1,49 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ScrollLink from "./ScrollLink";
 import { navLinks } from "../data/navLinks";
+import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
 
-const Navbar = ({ toggleTheme, theme }) => {
+const Navbar = ({ toggleTheme, theme, themeMode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+
+  // Track active section with IntersectionObserver
+  useEffect(() => {
+    const sectionIds = navLinks.map((link) => link.href.replace("#", ""));
+    const observers = [];
+
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
+        },
+        { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+      );
+
+      observer.observe(element);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, []);
+
+  const themeIcon =
+    themeMode === "dark" ? (
+      <FiMoon size={16} />
+    ) : themeMode === "light" ? (
+      <FiSun size={16} />
+    ) : (
+      <FiMonitor size={16} />
+    );
+
+  const themeLabel =
+    themeMode === "dark" ? "Dark" : themeMode === "light" ? "Light" : "Auto";
 
   return (
     <motion.nav
@@ -35,37 +74,81 @@ const Navbar = ({ toggleTheme, theme }) => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <motion.div key={link.name} whileHover={{ y: -2 }}>
-                <ScrollLink
-                  to={link.href}
-                  className={`text-sm font-medium ${
-                    theme === "dark"
-                      ? "text-gray-300 hover:text-white"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
+            {navLinks.map((link) => {
+              const sectionId = link.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+
+              return (
+                <motion.div
+                  key={link.name}
+                  whileHover={{ y: -2 }}
+                  className="relative"
                 >
-                  {link.name}
-                </ScrollLink>
-              </motion.div>
-            ))}
+                  <ScrollLink
+                    to={link.href}
+                    className={`text-sm font-medium transition-colors duration-200 ${
+                      isActive
+                        ? "text-indigo-500"
+                        : theme === "dark"
+                        ? "text-gray-300 hover:text-white"
+                        : "text-gray-600 hover:text-gray-900"
+                    }`}
+                  >
+                    {link.name}
+                  </ScrollLink>
+                  {isActive && (
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-indigo-500 rounded-full"
+                      layoutId="activeNavIndicator"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </motion.div>
+              );
+            })}
 
             <motion.button
               onClick={toggleTheme}
-              className={`p-2 rounded-full ${
+              className={`p-2 rounded-full flex items-center gap-1.5 text-xs font-medium transition-colors duration-200 ${
                 theme === "dark"
-                  ? "bg-gray-800 text-yellow-400"
-                  : "bg-gray-200 text-gray-700"
+                  ? "bg-gray-800 text-gray-300 hover:text-white"
+                  : "bg-gray-200 text-gray-600 hover:text-gray-900"
               }`}
-              whileHover={{ rotate: 15 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9 }}
+              title={`Theme: ${themeLabel}`}
             >
-              {theme === "dark" ? "☀️" : "🌙"}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={themeMode}
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 10, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {themeIcon}
+                </motion.span>
+              </AnimatePresence>
             </motion.button>
           </div>
 
           {/* Mobile Navigation */}
-          <div className="flex md:hidden items-center">
+          <div className="flex md:hidden items-center gap-2">
+            <motion.button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full ${
+                theme === "dark"
+                  ? "bg-gray-800 text-gray-300"
+                  : "bg-gray-200 text-gray-600"
+              }`}
+              whileTap={{ scale: 0.9 }}
+            >
+              {themeIcon}
+            </motion.button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-md ${
@@ -109,50 +192,45 @@ const Navbar = ({ toggleTheme, theme }) => {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          className="md:hidden"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-        >
-          <div
-            className={`px-2 pt-2 pb-3 space-y-1 ${
-              theme === "dark" ? "bg-gray-900" : "bg-white"
-            }`}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="md:hidden overflow-hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
           >
-            {navLinks.map((link) => (
-              <ScrollLink
-                key={link.name}
-                to={link.href}
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
-                  theme === "dark"
-                    ? "text-gray-300 hover:bg-gray-800"
-                    : "text-gray-600 hover:bg-gray-100"
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </ScrollLink>
-            ))}
+            <div
+              className={`px-2 pt-2 pb-3 space-y-1 ${
+                theme === "dark" ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              {navLinks.map((link) => {
+                const sectionId = link.href.replace("#", "");
+                const isActive = activeSection === sectionId;
 
-            <div className="px-3 py-2">
-              <motion.button
-                onClick={toggleTheme}
-                className={`p-2 rounded-md flex items-center justify-center ${
-                  theme === "dark"
-                    ? "bg-gray-800 text-yellow-400"
-                    : "bg-gray-200 text-gray-700"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {theme === "dark" ? "☀️" : "🌙 "}
-              </motion.button>
+                return (
+                  <ScrollLink
+                    key={link.name}
+                    to={link.href}
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                      isActive
+                        ? "text-indigo-500 bg-indigo-500/10"
+                        : theme === "dark"
+                        ? "text-gray-300 hover:bg-gray-800"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </ScrollLink>
+                );
+              })}
             </div>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };

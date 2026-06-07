@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FiMail, FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
+import { FiMail, FiPhone, FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import ContactForm from "./ContactForm";
 
 const ContactSection = ({ theme, id }) => {
@@ -61,7 +61,7 @@ const ContactSection = ({ theme, id }) => {
                       theme === "dark" ? "bg-gray-800" : "bg-indigo-100"
                     } text-indigo-500`}
                   >
-                    <FiMail size={24} />
+                    <FiPhone size={24} />
                   </div>
                 </div>
                 <div className="ml-4">

@@ -115,7 +115,7 @@ export const allProjects = [
   // },
   {
     title: "ASP.NET-MVC-CRUD",
-    description: "Platform for online muisc with video streaming.",
+    description: "A full-stack CRUD application built with ASP.NET MVC and MySQL, demonstrating clean MVC architecture, Entity Framework integration, and efficient database operations.",
     tags: ["C#", "MVC", "MYSQL"],
     link: "https://github.com/razorisuru/ASP.NET-MVC-CRUD",
     source: "https://github.com/razorisuru/ASP.NET-MVC-CRUD",

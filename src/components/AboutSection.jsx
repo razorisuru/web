@@ -80,7 +80,7 @@ const AboutSection = ({ theme, id }) => {
                   <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
                   <span className="font-medium">Work:</span>
                 </div>
-                <p>SE Cybernetic Pvt Ltd</p>
+                <p>SE 360 Productions Group (pvt) Ltd.</p>
               </div>
               <div>
                 <div className="flex items-center mb-1">

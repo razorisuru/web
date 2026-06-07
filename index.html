@@ -7,6 +7,25 @@
   <meta name="theme-color" content="#4f46e5" />
   <meta name="color-scheme" content="dark light" />
 
+  <!-- FOUC Prevention: set theme before React loads -->
+  <script>
+    (function() {
+      var mode = localStorage.getItem('themeMode') || 'system';
+      var theme;
+      if (mode === 'system') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      } else {
+        theme = mode;
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <!-- Favicon -->
   <link rel="icon" type="image/png"
     href="https://raw.githubusercontent.com/razorisuru/web/refs/heads/main/public/favicon.png">
@@ -89,7 +108,7 @@
     "jobTitle": "Full Stack Web Developer",
     "worksFor": {
       "@type": "Organization",
-      "name": "SE Cybernetic Pvt Ltd"
+      "name": "SE 360 Productions Group (pvt) Ltd."
     },
     "address": {
       "@type": "PostalAddress",

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ScrollLink from "./ScrollLink";
+import TypeWriter from "./TypeWriter";
 
 const HeroSection = ({ theme, id }) => {
   return (
@@ -19,20 +20,16 @@ const HeroSection = ({ theme, id }) => {
               Isuru <span className="text-indigo-500">Bandara</span>
             </h1>
             <div className="text-xl md:text-2xl mb-6">
-              <span className="inline-block mr-2">FullStack</span>
-              <motion.span
-                className="text-indigo-500 font-semibold inline-block"
-                animate={{
-                  rotate: [0, 10, 0, -10, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                Developer
-              </motion.span>
+              <TypeWriter
+                words={[
+                  "Full Stack Developer",
+                  "Laravel Expert",
+                  "React Engineer",
+                  "UI/UX Designer",
+                  "Node.js Developer",
+                ]}
+                className="text-indigo-500 font-semibold"
+              />
             </div>
             <p
               className={`text-lg mb-8 max-w-lg ${

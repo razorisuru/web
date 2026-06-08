@@ -120,7 +120,7 @@ const HeroSection = ({ theme, id }) => {
 
                 <div className="relative z-10 rounded-3xl w-full h-80 md:h-96 overflow-hidden">
                   <img
-                    src="/hero-bg.jpg"
+                    src="/ogimg.png"
                     alt="Hero background"
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />

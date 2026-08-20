@@ -1,5 +1,15 @@
 export const allProjects = [
   {
+    title: "LocalShare",
+    description:
+      "LocalShare turns every PC on your network into a peer. Open it and the machines around you appear on their own then drag a file onto one and it goes straight there, at the speed of your cable. No cloud, no accounts, nothing to configure.",
+    tags: ["C#", ".NET10", "WPF"],
+    link: "https://localshare.razorisuru.com/",
+    source: "https://github.com/razorisuru/LocalShare",
+    image:
+      "https://raw.githubusercontent.com/razorisuru/LocalShare-web/refs/heads/main/og-image.png",
+  },
+  {
     title: "Learning Materials Management System",
     description:
       "A Laravel-based project that facilitates efficient organization, management, and retrieval of educational resources for students and lecturers. It includes features like user management, file categorization, and secure access control.",
@@ -22,11 +32,20 @@ export const allProjects = [
   {
     title: "Up Ride Mobile App",
     description:
-      "Up Ride is a convenient ride-booking app that connects customers with nearby drivers. Users can request a ride instantly or schedule a trip for a specific date and time. Drivers can view incoming ride requests and accept them based on availability.Up Ride supports both time-based and distance-based ride options, giving customers flexibility to choose the most suitable type of trip. After completing a ride, users can make secure payments directly through the app. Whether you are booking a quick trip or planning ahead, Up Ride provides a simple and reliable way to travel.",
+      "Up Ride is a convenient ride-booking app that connects customers with nearby drivers. Users can request a ride instantly or schedule a trip for a specific date and time. Drivers can view incoming ride requests and accept them based on availability.",
     tags: ["React Native", "Firebase", "Google Maps API"],
-    link: "https://upride.cybernetic.lk",
-    source: "https://upride.cybernetic.lk",
+    link: "#",
+    source: "#",
     image: "/upride.png",
+  },
+  {
+    title: "Angular CRUD with Laravel API",
+    description:
+      "A full-stack project combining Angular for the frontend and Laravel for the backend. It implements CRUD operations, showcasing seamless integration and efficient communication between the client and server.",
+    tags: ["AngularJS", "Laravel", "API"],
+    link: "https://github.com/razorisuru/Angular-crud-laravel-API",
+    source: "https://github.com/razorisuru/Angular-crud-laravel-API",
+    image: "https://angular.dev/assets/images/ng-image.jpg",
   },
   {
     title: "Next Blogger",
@@ -34,16 +53,17 @@ export const allProjects = [
       "A modern, full-featured blogging platform built with Next.js 16, featuring role-based access control (RBAC), user authentication, and a beautiful responsive UI.",
     tags: ["NextJS", "PrismaORM", "ReactJS", "PostgreSQL"],
     link: "https://nextblog.razorisuru.com/",
-    source: "https://github.com/razorisuru/role-based-post-management-system-nextjs",
+    source:
+      "https://github.com/razorisuru/role-based-post-management-system-nextjs",
     image: "/nextBlog.png",
   },
   {
     title: "HRM System",
     description:
-      "A fully featured HRM application built using Next.js, React.js, Prisma ORM, and MySQL, developed following clean architecture and modern development principles. The system includes role-based access, employee management, attendance tracking, and streamlined administrative workflows. Designed with scalability, maintainability, and performance in mind, this application showcases efficient backend logic, optimized database operations, and a smooth, intuitive user experience.",
+      "A fully featured HRM application , developed following clean architecture and modern development principles. The system includes role-based access, employee management, attendance tracking, and streamlined administrative workflows.",
     tags: ["NextJS", "PrismaORM", "ReactJS", "MySQL"],
-    link: "https://lakderana.cybernetic.lk",
-    source: "https://lakderana.cybernetic.lk",
+    link: "#",
+    source: "#",
     image: "/lak.png",
   },
   {
@@ -66,36 +86,27 @@ export const allProjects = [
     image:
       "https://raw.githubusercontent.com/razorisuru/web/refs/heads/main/public/gem.png",
   },
-  {
-    title: "To-Do List App (MERN Stack)",
-    description:
-      "A feature-rich to-do list application developed using the MERN stack (MongoDB, Express.js, React, Node.js). The app offers functionalities such as task creation, updating, and deletion, ensuring seamless task management.",
-    tags: ["NodeJS", "ReactJS", "ExpressJS", "MongoDB"],
-    link: "https://github.com/razorisuru/To-Do-List-App-MERN-STACK",
-    source: "https://github.com/razorisuru/To-Do-List-App-MERN-STACK",
-    image:
-      "https://media.geeksforgeeks.org/wp-content/uploads/20240803123607/todolist-mern.png",
-  },
-  {
-    title: "Spring Boot API Application",
-    description:
-      "A robust API developed using Spring Boot, featuring full CRUD functionality. This project demonstrates proficiency in RESTful API design, database integration, and efficient backend development.",
-    tags: ["JAVA", "Springboot", "MYSQL"],
-    link: "https://github.com/razorisuru/Springboot-CRUD-App-API",
-    source: "https://github.com/razorisuru/Springboot-CRUD-App-API",
-    image:
-      "https://media.licdn.com/dms/image/v2/D5612AQH10w0ZnlEVXw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1728399585931?e=2147483647&v=beta&t=7sCN97pPF1ddtldBNKlL6bfBWrWqxF1_-CC8E88GWI4",
-  },
-  {
-    title: "Angular CRUD with Laravel API",
-    description:
-      "A full-stack project combining Angular for the frontend and Laravel for the backend. It implements CRUD operations, showcasing seamless integration and efficient communication between the client and server.",
-    tags: ["AngularJS", "Laravel", "API"],
-    link: "https://github.com/razorisuru/Angular-crud-laravel-API",
-    source: "https://github.com/razorisuru/Angular-crud-laravel-API",
-    image:
-      "https://therichpost.com/wp-content/uploads/2020/01/angular_laravel_crud_part_1.png",
-  },
+  // {
+  //   title: "To-Do List App (MERN Stack)",
+  //   description:
+  //     "A feature-rich to-do list application developed using the MERN stack (MongoDB, Express.js, React, Node.js). The app offers functionalities such as task creation, updating, and deletion, ensuring seamless task management.",
+  //   tags: ["NodeJS", "ReactJS", "ExpressJS", "MongoDB"],
+  //   link: "https://github.com/razorisuru/To-Do-List-App-MERN-STACK",
+  //   source: "https://github.com/razorisuru/To-Do-List-App-MERN-STACK",
+  //   image:
+  //     "https://media.geeksforgeeks.org/wp-content/uploads/20240803123607/todolist-mern.png",
+  // },
+  // {
+  //   title: "Spring Boot API Application",
+  //   description:
+  //     "A robust API developed using Spring Boot, featuring full CRUD functionality. This project demonstrates proficiency in RESTful API design, database integration, and efficient backend development.",
+  //   tags: ["JAVA", "Springboot", "MYSQL"],
+  //   link: "https://github.com/razorisuru/Springboot-CRUD-App-API",
+  //   source: "https://github.com/razorisuru/Springboot-CRUD-App-API",
+  //   image:
+  //     "https://media.licdn.com/dms/image/v2/D5612AQH10w0ZnlEVXw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1728399585931?e=2147483647&v=beta&t=7sCN97pPF1ddtldBNKlL6bfBWrWqxF1_-CC8E88GWI4",
+  // },
+
   {
     title: "Airplane Tickets Project",
     description:
@@ -113,13 +124,13 @@ export const allProjects = [
   //   link: "https://music.razorisuru.com/",
   //   image: "/placeholder-image.png",
   // },
-  {
-    title: "ASP.NET-MVC-CRUD",
-    description: "A full-stack CRUD application built with ASP.NET MVC and MySQL, demonstrating clean MVC architecture, Entity Framework integration, and efficient database operations.",
-    tags: ["C#", "MVC", "MYSQL"],
-    link: "https://github.com/razorisuru/ASP.NET-MVC-CRUD",
-    source: "https://github.com/razorisuru/ASP.NET-MVC-CRUD",
-    image:
-      "https://www.sourcecodester.com/sites/default/files/images/Hasan%20soherwardi/untitled.png",
-  },
+  // {
+  //   title: "ASP.NET-MVC-CRUD",
+  //   description: "A full-stack CRUD application built with ASP.NET MVC and MySQL, demonstrating clean MVC architecture, Entity Framework integration, and efficient database operations.",
+  //   tags: ["C#", "MVC", "MYSQL"],
+  //   link: "https://github.com/razorisuru/ASP.NET-MVC-CRUD",
+  //   source: "https://github.com/razorisuru/ASP.NET-MVC-CRUD",
+  //   image:
+  //     "https://www.sourcecodester.com/sites/default/files/images/Hasan%20soherwardi/untitled.png",
+  // },
 ];

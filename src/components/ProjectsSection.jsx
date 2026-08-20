@@ -50,24 +50,28 @@ const ProjectsSection = ({ id, visibleProjects, loadMoreProjects }) => {
                 </div>
 
                 <div className="hm-project__acts">
-                  <a
-                    href={project.link}
-                    className="hm-act"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Preview
-                    <FiArrowUpRight size={13} aria-hidden="true" />
-                  </a>
-                  <a
-                    href={project.source}
-                    className="hm-act"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Source
-                    <FiGithub size={13} aria-hidden="true" />
-                  </a>
+                  {project.link && project.link !== "#" && (
+                    <a
+                      href={project.link}
+                      className="hm-act"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Preview
+                      <FiArrowUpRight size={13} aria-hidden="true" />
+                    </a>
+                  )}
+                  {project.source && project.source !== "#" && (
+                    <a
+                      href={project.source}
+                      className="hm-act"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Source
+                      <FiGithub size={13} aria-hidden="true" />
+                    </a>
+                  )}
                 </div>
               </div>
             </li>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import { FiAlertCircle, FiCheck, FiX, FiSend } from "react-icons/fi";
 
 /**
@@ -23,7 +24,7 @@ const ContactForm = () => {
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
   const handleChange = (e) => {
@@ -34,7 +35,7 @@ const ContactForm = () => {
     }));
     setFormErrors((prev) => ({
       ...prev,
-      [id]: ""
+      [id]: "",
     }));
   };
 
@@ -44,7 +45,7 @@ const ContactForm = () => {
       name: "",
       email: "",
       subject: "",
-      message: ""
+      message: "",
     };
     if (formData.name.trim().length < 2) {
       errors.name = "Name must be at least 2 characters";
@@ -75,13 +76,16 @@ const ContactForm = () => {
     setIsSubmitting(true);
     setError(null);
     try {
-      const response = await fetch("https://razor-mail-server.vercel.app/api/email/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://razor-mail-server.vercel.app/api/email/send",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData),
-      });
+      );
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || "Failed to send message");
@@ -147,7 +151,12 @@ const ContactForm = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="w-full" aria-label="Contact form" noValidate>
+    <form
+      onSubmit={handleSubmit}
+      className="w-full"
+      aria-label="Contact form"
+      noValidate
+    >
       <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
         {fields.map((field) => (
           <div key={field.id} className={field.half ? "" : "sm:col-span-2"}>
@@ -196,7 +205,9 @@ const ContactForm = () => {
             maxLength={500}
             aria-required="true"
             aria-invalid={formErrors.message ? "true" : "false"}
-            aria-describedby={formErrors.message ? "message-error message-desc" : "message-desc"}
+            aria-describedby={
+              formErrors.message ? "message-error message-desc" : "message-desc"
+            }
           ></textarea>
           <div className="flex items-baseline justify-between gap-4">
             <p id="message-error" className="hm-fieldnote">
@@ -219,7 +230,11 @@ const ContactForm = () => {
           className="mt-8 flex items-start gap-3 border-t-2 border-danger pt-4 text-danger"
           role="alert"
         >
-          <FiAlertCircle size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
+          <FiAlertCircle
+            size={18}
+            className="mt-0.5 shrink-0"
+            aria-hidden="true"
+          />
           <div className="min-w-0 flex-1">
             <p className="font-semibold">{error}</p>
             <p className="mt-1 text-sm">
@@ -238,16 +253,30 @@ const ContactForm = () => {
         </div>
       )}
 
-      <div className="mt-10">
+      <div className="mt-10 flex items-center gap-3">
         <button
           type="submit"
-          className="hm-btn w-full justify-center sm:w-auto"
+          className="hm-btn flex-1 sm:flex-none justify-center"
           disabled={isSubmitting}
           aria-busy={isSubmitting}
         >
           {isSubmitting ? "Sending..." : "Send Message"}
           <FiSend size={15} aria-hidden="true" />
         </button>
+
+        <span className="hm-label text-muted lowercase shrink-0">or</span>
+
+        <a
+          href="https://wa.me/94766008527"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact on WhatsApp (0766008527)"
+          title="Chat on WhatsApp: 0766008527"
+          className="hm-btn shrink-0 !px-3.5 !bg-[#25D366] !text-white !border-[#25D366] hover:!bg-[#20ba59] hover:!border-[#20ba59] transition-transform hover:scale-105"
+        >
+          <FaWhatsapp size={20} aria-hidden="true" />
+          <span className="hidden sm:inline">WhatsApp</span>
+        </a>
       </div>
     </form>
   );

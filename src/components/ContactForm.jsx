@@ -105,6 +105,21 @@ const ContactForm = () => {
     }
   };
 
+  const getWhatsAppUrl = () => {
+    const parts = [];
+    if (formData.name.trim()) parts.push(`*Name:* ${formData.name.trim()}`);
+    if (formData.email.trim()) parts.push(`*Email:* ${formData.email.trim()}`);
+    if (formData.subject.trim()) parts.push(`*Subject:* ${formData.subject.trim()}`);
+    if (formData.message.trim()) parts.push(`*Message:* ${formData.message.trim()}`);
+
+    if (parts.length === 0) {
+      return "https://wa.me/94766008527";
+    }
+
+    const messageText = `Hi Isuru,\n\n${parts.join("\n")}`;
+    return `https://wa.me/94766008527?text=${encodeURIComponent(messageText)}`;
+  };
+
   if (isSuccess) {
     return (
       <div className="border-t-2 border-ink pt-6" role="status">
@@ -267,7 +282,7 @@ const ContactForm = () => {
         <span className="hm-label text-muted lowercase shrink-0">or</span>
 
         <a
-          href="https://wa.me/94766008527"
+          href={getWhatsAppUrl()}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact on WhatsApp (0766008527)"

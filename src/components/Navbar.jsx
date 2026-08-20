@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import ScrollLink from "./ScrollLink";
 import { navLinks } from "../data/navLinks";
 import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
 
-const Navbar = ({ toggleTheme, theme, themeMode }) => {
-  const [isOpen, setIsOpen] = useState(false);
+/**
+ * N6 · Newspaper masthead.
+ *
+ * The flag (mark + name, centred, closed by a double rule) scrolls away like
+ * a broadsheet's; only the link rail sticks. The rail is the page's index —
+ * mono caps, hairline, active section underlined in the signal ink. On narrow
+ * viewports it scrolls horizontally instead of collapsing behind a hamburger,
+ * so every destination stays one tap away and no label ever wraps.
+ */
+// `theme` is still passed by App.jsx; the masthead reads its colours from the
+// `[data-theme]` token layer, so only `themeMode` (the tri-state) is consumed.
+const Navbar = ({ toggleTheme, themeMode }) => {
   const [activeSection, setActiveSection] = useState("hero");
+  const railRef = useRef(null);
 
   // Track active section with IntersectionObserver
   useEffect(() => {
@@ -33,205 +43,93 @@ const Navbar = ({ toggleTheme, theme, themeMode }) => {
     return () => observers.forEach((obs) => obs.disconnect());
   }, []);
 
+  // Keep the active rail item in view when the rail is scrollable (narrow
+  // viewports). preventScroll-equivalent: we only move the rail, never the page.
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const current = rail.querySelector('[aria-current="true"]');
+    if (!current) return;
+
+    const target =
+      current.offsetLeft - rail.clientWidth / 2 + current.clientWidth / 2;
+    rail.scrollTo({
+      left: Math.max(0, target),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  }, [activeSection]);
+
   const themeIcon =
     themeMode === "dark" ? (
-      <FiMoon size={16} />
+      <FiMoon size={14} aria-hidden="true" />
     ) : themeMode === "light" ? (
-      <FiSun size={16} />
+      <FiSun size={14} aria-hidden="true" />
     ) : (
-      <FiMonitor size={16} />
+      <FiMonitor size={14} aria-hidden="true" />
     );
 
   const themeLabel =
     themeMode === "dark" ? "Dark" : themeMode === "light" ? "Light" : "Auto";
 
   return (
-    <motion.nav
-      className={`fixed w-full z-50 backdrop-blur-md ${
-        theme === "dark" ? "bg-gray-900/80" : "bg-white/80"
-      } border-b ${theme === "dark" ? "border-gray-800" : "border-gray-200"}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <motion.div
-              className="text-2xl font-bold"
-              whileHover={{ scale: 1.15 }}
-            >
-              <ScrollLink to="#hero" className="cursor-pointer">
-                {/* <span className="text-indigo-500">R</span>I */}
-                <img
-                  src="/RAZOR2.png"
-                  alt="Hero background"
-                  className="w-13 h-13 object-cover"
-                />
-              </ScrollLink>
-            </motion.div>
-          </div>
+    <header className="hm-header">
+      <div className="hm-mast">
+        <div className="hm-shell hm-mast__row">
+          <ScrollLink
+            to="#hero"
+            className="hm-mast__name"
+            aria-label="Isuru Bandara — back to top"
+          >
+            <img
+              src="/RAZOR2.png"
+              alt=""
+              width="40"
+              height="40"
+              className="hm-mast__mark"
+            />
+            Isuru Bandara
+          </ScrollLink>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => {
-              const sectionId = link.href.replace("#", "");
-              const isActive = activeSection === sectionId;
-
-              return (
-                <motion.div
-                  key={link.name}
-                  whileHover={{ y: -2 }}
-                  className="relative"
-                >
-                  <ScrollLink
-                    to={link.href}
-                    className={`text-sm font-medium transition-colors duration-200 ${
-                      isActive
-                        ? "text-indigo-500"
-                        : theme === "dark"
-                        ? "text-gray-300 hover:text-white"
-                        : "text-gray-600 hover:text-gray-900"
-                    }`}
-                  >
-                    {link.name}
-                  </ScrollLink>
-                  {isActive && (
-                    <motion.div
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-indigo-500 rounded-full"
-                      layoutId="activeNavIndicator"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </motion.div>
-              );
-            })}
-
-            <motion.button
+          <div className="hm-mast__aside">
+            <button
+              type="button"
               onClick={toggleTheme}
-              className={`p-2 rounded-full flex items-center gap-1.5 text-xs font-medium transition-colors duration-200 ${
-                theme === "dark"
-                  ? "bg-gray-800 text-gray-300 hover:text-white"
-                  : "bg-gray-200 text-gray-600 hover:text-gray-900"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
+              className="hm-toggle"
+              aria-label={`Theme: ${themeLabel}. Change theme.`}
               title={`Theme: ${themeLabel}`}
             >
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={themeMode}
-                  initial={{ y: -10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 10, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  {themeIcon}
-                </motion.span>
-              </AnimatePresence>
-            </motion.button>
-          </div>
-
-          {/* Mobile Navigation */}
-          <div className="flex md:hidden items-center gap-2">
-            <motion.button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full ${
-                theme === "dark"
-                  ? "bg-gray-800 text-gray-300"
-                  : "bg-gray-200 text-gray-600"
-              }`}
-              whileTap={{ scale: 0.9 }}
-            >
               {themeIcon}
-            </motion.button>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-md ${
-                theme === "dark"
-                  ? "text-gray-300 hover:bg-gray-800"
-                  : "text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              {isOpen ? (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
+              <span className="hm-toggle__label">{themeLabel}</span>
             </button>
           </div>
         </div>
+        <div className="hm-shell">
+          <hr className="hm-rule-double" aria-hidden="true" />
+        </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="md:hidden overflow-hidden"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-          >
-            <div
-              className={`px-2 pt-2 pb-3 space-y-1 ${
-                theme === "dark" ? "bg-gray-900" : "bg-white"
-              }`}
-            >
-              {navLinks.map((link) => {
-                const sectionId = link.href.replace("#", "");
-                const isActive = activeSection === sectionId;
+      <nav className="hm-rail" aria-label="Sections">
+        <div className="hm-shell hm-rail__inner" ref={railRef}>
+          {navLinks.map((link) => {
+            const sectionId = link.href.replace("#", "");
+            const isActive = activeSection === sectionId;
 
-                return (
-                  <ScrollLink
-                    key={link.name}
-                    to={link.href}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                      isActive
-                        ? "text-indigo-500 bg-indigo-500/10"
-                        : theme === "dark"
-                        ? "text-gray-300 hover:bg-gray-800"
-                        : "text-gray-600 hover:bg-gray-100"
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                  </ScrollLink>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+            return (
+              <ScrollLink
+                key={link.name}
+                to={link.href}
+                className="hm-rail__link"
+                aria-current={isActive ? "true" : undefined}
+              >
+                {link.name}
+              </ScrollLink>
+            );
+          })}
+        </div>
+      </nav>
+    </header>
   );
 };
 

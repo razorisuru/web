@@ -1,36 +1,36 @@
-import React from "react";
 
-const ScrollLink = ({
-  to,
-  children,
-  className,
-  onClick,
-  theme,
-  ...props
-}) => {
+/**
+ * Anchor that scrolls to a section, offset by the sticky rail so the section
+ * head is never hidden underneath it. Honours `prefers-reduced-motion` by
+ * jumping instead of gliding.
+ */
+const ScrollLink = ({ to, children, className, onClick, ...props }) => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    // Execute any passed onClick handler first (like closing mobile menu)
     if (onClick) onClick(e);
 
-    // Wait a brief moment for any UI changes (like menu closing) to complete
-    setTimeout(() => {
-      const targetElement = document.querySelector(to);
-      if (targetElement) {
-        const navbar = document.querySelector("nav");
-        const navbarHeight = navbar ? navbar.offsetHeight : 80;
-        const targetPosition =
-          targetElement.getBoundingClientRect().top +
-          window.pageYOffset -
-          navbarHeight;
+    const targetElement = document.querySelector(to);
+    if (!targetElement) return;
 
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-      }
-    }, 100); // Small delay to allow menu to close
+    // Offset by the sticky header so section heads are never hidden underneath
+    const header = document.querySelector("header");
+    const headerHeight = header ? header.offsetHeight : 80;
+
+    const targetPosition =
+      targetElement.getBoundingClientRect().top +
+      window.pageYOffset -
+      headerHeight -
+      8;
+
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    window.scrollTo({
+      top: Math.max(0, targetPosition),
+      behavior: reduced ? "auto" : "smooth",
+    });
   };
 
   return (

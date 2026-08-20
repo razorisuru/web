@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUp } from "react-icons/fi";
 
 // Components
@@ -66,17 +65,28 @@ function App() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, [themeMode]);
 
-  // Update meta theme-color and data-theme attribute to match
+  // Update meta theme-color and data-theme attribute to match.
+  // data-theme is what the whole token layer keys off — see src/index.css.
   useEffect(() => {
-    // Set data-theme for CSS selectors (scrollbar, etc.)
     document.documentElement.setAttribute("data-theme", theme);
 
+    // Browser chrome has to be an sRGB hex, but the value is *derived* from
+    // --hm-paper rather than hard-coded, so it can never drift from the token.
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute(
-        "content",
-        theme === "dark" ? "#111827" : "#eef2ff"
-      );
+      const paper = getComputedStyle(document.documentElement)
+        .getPropertyValue("--hm-paper")
+        .trim();
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 1;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = paper;
+      ctx.fillRect(0, 0, 1, 1);
+      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+      const hex = `#${[r, g, b]
+        .map((c) => c.toString(16).padStart(2, "0"))
+        .join("")}`;
+      metaThemeColor.setAttribute("content", hex);
     }
   }, [theme]);
 
@@ -111,46 +121,43 @@ function App() {
   };
 
   return (
-    <div
-      className={`min-h-screen overflow-x-hidden transition-colors duration-500 ${
-        theme === "dark"
-          ? "bg-gray-900 text-white"
-          : "bg-gradient-to-br from-indigo-50 to-cyan-50 text-gray-900"
-      }`}
-    >
+    <div className="min-h-screen bg-paper text-ink">
+      <a
+        href="#hero"
+        className="hm-btn sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[400]"
+      >
+        Skip to content
+      </a>
+
       <ParticleBackground theme={theme} />
       <Navbar toggleTheme={toggleTheme} theme={theme} themeMode={themeMode} />
-      <HeroSection theme={theme} id="hero" />
-      <AboutSection theme={theme} id="about" />
-      <SkillsSection theme={theme} id="skills" />
-      <ResumeSection theme={theme} id="resume" />
-      <ProjectsSection
-        theme={theme}
-        id="projects"
-        visibleProjects={visibleProjects}
-        loadMoreProjects={loadMoreProjects}
-      />
-      <ServicesSection theme={theme} id="services" />
 
-      <ContactSection theme={theme} id="contact" />
+      <main>
+        <HeroSection theme={theme} id="hero" />
+        <AboutSection theme={theme} id="about" />
+        <SkillsSection theme={theme} id="skills" />
+        <ResumeSection theme={theme} id="resume" />
+        <ProjectsSection
+          theme={theme}
+          id="projects"
+          visibleProjects={visibleProjects}
+          loadMoreProjects={loadMoreProjects}
+        />
+        <ServicesSection theme={theme} id="services" />
+        <ContactSection theme={theme} id="contact" />
+      </main>
+
       <Footer ScrollLink={ScrollLink} theme={theme} />
 
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            onClick={scrollToTop}
-            aria-label="Scroll to top"
-            className="fixed bottom-8 right-8 p-3 rounded-full bg-indigo-600 text-white shadow-lg z-50"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiArrowUp size={24} />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+          className="hm-btn fixed bottom-6 right-6 z-[200] !px-3"
+        >
+          <FiArrowUp size={18} aria-hidden="true" />
+        </button>
+      )}
     </div>
   );
 }

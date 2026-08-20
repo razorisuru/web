@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { FiAlertCircle, FiCheck, FiX, FiSend } from "react-icons/fi";
 
-const ContactForm = ({ theme }) => {
+/**
+ * Restyle only — the submit handler, endpoint, state shape and validation
+ * rules below are unchanged from the original.
+ *
+ * Fields are hairline-underlined rather than filled glass panels; they inherit
+ * `currentColor`, so they read correctly on any band. Errors carry an icon and
+ * a heavier rule as well as colour, so the signal survives colour-blindness.
+ */
+const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState(null);
@@ -58,6 +66,7 @@ const ContactForm = ({ theme }) => {
     setFormErrors(errors);
     return isValid;
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
@@ -92,265 +101,154 @@ const ContactForm = ({ theme }) => {
     }
   };
 
- // Add a better success message with animation
-if (isSuccess) {
-  return (
-    <motion.div
-      className={`text-center p-8 rounded-xl ${
-        theme === "dark" ? "bg-white/5 text-white" : "bg-white text-gray-800"
-      } shadow-lg border ${theme === "dark" ? "border-white/10" : "border-gray-200"}`}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="mb-4 flex justify-center">
-        <motion.div 
-          className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+  if (isSuccess) {
+    return (
+      <div className="border-t-2 border-ink pt-6" role="status">
+        <p className="hm-label mb-3 flex items-center gap-2 text-accent">
+          <FiCheck size={14} aria-hidden="true" />
+          Message Sent Successfully!
+        </p>
+        <p className="mb-8 max-w-[46ch] text-ink-2">
+          Thank you for your message. I&rsquo;ll get back to you soon.
+        </p>
+        <button
+          type="button"
+          onClick={() => setIsSuccess(false)}
+          className="hm-chip"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </motion.div>
+          Send Another Message
+        </button>
       </div>
-      <motion.h3 
-        className="text-xl font-semibold mb-2"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        Message Sent Successfully!
-      </motion.h3>
-      <motion.p 
-        className="mb-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-      >
-        Thank you for your message. I'll get back to you soon.
-      </motion.p>
-      <motion.button
-        onClick={() => setIsSuccess(false)}
-        className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        Send Another Message
-      </motion.button>
-    </motion.div>
-  );
-}
+    );
+  }
+
+  const fields = [
+    {
+      id: "name",
+      label: "Your Name",
+      type: "text",
+      placeholder: "Nimal Perera",
+      half: true,
+    },
+    {
+      id: "email",
+      label: "Your Email",
+      type: "email",
+      placeholder: "name@example.com",
+      half: true,
+    },
+    {
+      id: "subject",
+      label: "Subject",
+      type: "text",
+      placeholder: "Project Inquiry",
+      half: false,
+    },
+  ];
 
   return (
     <form onSubmit={handleSubmit} className="w-full" aria-label="Contact form" noValidate>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-        <div>
-          <label
-            htmlFor="name"
-            className={`block text-sm font-semibold mb-2 ${
-              theme === "dark" ? "text-gray-200" : "text-gray-700"
-            }`}
-          >
-            Your Name
+      <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+        {fields.map((field) => (
+          <div key={field.id} className={field.half ? "" : "sm:col-span-2"}>
+            <label htmlFor={field.id} className="hm-label mb-1 block">
+              {field.label}
+            </label>
+            <input
+              type={field.type}
+              id={field.id}
+              name={field.id}
+              value={formData[field.id]}
+              onChange={handleChange}
+              className="hm-field"
+              placeholder={field.placeholder}
+              required
+              aria-required="true"
+              aria-invalid={formErrors[field.id] ? "true" : "false"}
+              aria-describedby={
+                formErrors[field.id] ? `${field.id}-error` : undefined
+              }
+            />
+            <p id={`${field.id}-error`} className="hm-fieldnote">
+              {formErrors[field.id] && (
+                <>
+                  <FiAlertCircle size={13} aria-hidden="true" />
+                  {formErrors[field.id]}
+                </>
+              )}
+            </p>
+          </div>
+        ))}
+
+        <div className="sm:col-span-2">
+          <label htmlFor="message" className="hm-label mb-1 block">
+            Message
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            value={formData.message}
             onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 ${
-              theme === "dark"
-                ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-                : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-            } ${formErrors.name ? "border-red-500" : ""} focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-            placeholder="John Doe"
+            className="hm-field"
+            placeholder="Your message here..."
             required
+            maxLength={500}
             aria-required="true"
-            aria-invalid={formErrors.name ? "true" : "false"}
-            aria-describedby={formErrors.name ? "name-error" : undefined}
-          />
-          {formErrors.name && (
-            <p id="name-error" className="mt-1 text-sm text-red-500">{formErrors.name}</p>
-          )}
+            aria-invalid={formErrors.message ? "true" : "false"}
+            aria-describedby={formErrors.message ? "message-error message-desc" : "message-desc"}
+          ></textarea>
+          <div className="flex items-baseline justify-between gap-4">
+            <p id="message-error" className="hm-fieldnote">
+              {formErrors.message && (
+                <>
+                  <FiAlertCircle size={13} aria-hidden="true" />
+                  {formErrors.message}
+                </>
+              )}
+            </p>
+            <p id="message-desc" className="hm-num shrink-0 text-xs text-muted">
+              {formData.message.length}/500 characters
+            </p>
+          </div>
         </div>
-        <div>
-          <label
-            htmlFor="email"
-            className={`block text-sm font-semibold mb-2 ${
-              theme === "dark" ? "text-gray-200" : "text-gray-700"
-            }`}
+      </div>
+
+      {error && (
+        <div
+          className="mt-8 flex items-start gap-3 border-t-2 border-danger pt-4 text-danger"
+          role="alert"
+        >
+          <FiAlertCircle size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold">{error}</p>
+            <p className="mt-1 text-sm">
+              Please try again or contact me directly at
+              isurubandara318@gmail.com
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setError(null)}
+            className="hm-act shrink-0"
+            aria-label="Dismiss error message"
           >
-            Your Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 ${
-              theme === "dark"
-                ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-                : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-            } ${formErrors.email ? "border-red-500" : ""} focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-            placeholder="john@example.com"
-            required
-            aria-required="true"
-            aria-invalid={formErrors.email ? "true" : "false"}
-            aria-describedby={formErrors.email ? "email-error" : undefined}
-          />
-          {formErrors.email && (
-            <p id="email-error" className="mt-1 text-sm text-red-500">{formErrors.email}</p>
-          )}
+            <FiX size={16} aria-hidden="true" />
+          </button>
         </div>
-      </div>
+      )}
 
-      <div className="mb-6">
-        <label
-          htmlFor="subject"
-          className={`block text-sm font-semibold mb-2 ${
-            theme === "dark" ? "text-gray-200" : "text-gray-700"
-          }`}
+      <div className="mt-10">
+        <button
+          type="submit"
+          className="hm-btn w-full justify-center sm:w-auto"
+          disabled={isSubmitting}
+          aria-busy={isSubmitting}
         >
-          Subject
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 ${
-            theme === "dark"
-              ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-              : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-          } ${formErrors.subject ? "border-red-500" : ""} focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-          placeholder="Project Inquiry"
-          required
-          aria-required="true"
-          aria-invalid={formErrors.subject ? "true" : "false"}
-          aria-describedby={formErrors.subject ? "subject-error" : undefined}
-        />
-        {formErrors.subject && (
-          <p id="subject-error" className="mt-1 text-sm text-red-500">{formErrors.subject}</p>
-        )}
+          {isSubmitting ? "Sending..." : "Send Message"}
+          <FiSend size={15} aria-hidden="true" />
+        </button>
       </div>
-
-      <div className="mb-8">
-        <label
-          htmlFor="message"
-          className={`block text-sm font-semibold mb-2 ${
-            theme === "dark" ? "text-gray-200" : "text-gray-700"
-          }`}
-        >
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows="5"
-          value={formData.message}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-xl backdrop-blur-sm border transition-all duration-200 resize-none ${
-            theme === "dark"
-              ? "bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10 focus:border-indigo-400/50"
-              : "bg-white/30 border-white/20 text-gray-800 placeholder-gray-500 focus:bg-white/50 focus:border-indigo-500/50"
-          } ${formErrors.message ? "border-red-500" : ""} focus:ring-2 focus:ring-indigo-500/30 focus:border-transparent shadow-lg`}
-          placeholder="Your message here..."
-          required
-          maxLength={500}
-          aria-required="true"
-          aria-invalid={formErrors.message ? "true" : "false"}
-          aria-describedby={formErrors.message ? "message-error message-desc" : "message-desc"}
-        ></textarea>
-        {formErrors.message && (
-          <p id="message-error" className="mt-1 text-sm text-red-500">{formErrors.message}</p>
-        )}
-        <div id="message-desc" className={`text-right mt-1 text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
-          {formData.message.length}/500 characters
-        </div>
-      </div>
-
-{error && (
-  <motion.div 
-    className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg border border-red-200 flex items-start"
-    initial={{ opacity: 0, height: 0 }}
-    animate={{ opacity: 1, height: 'auto' }}
-    transition={{ duration: 0.3 }}
-  >
-    <div className="mr-3 flex-shrink-0 mt-0.5">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-      </svg>
-    </div>
-    <div className="flex-1">
-      <p className="font-medium">{error}</p>
-      <p className="text-sm mt-1">Please try again or contact me directly at isurubandara318@gmail.com</p>
-    </div>
-    <button 
-      onClick={() => setError(null)} 
-      className="flex-shrink-0 ml-2 text-red-500 hover:text-red-700"
-      aria-label="Dismiss error message"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-      </svg>
-    </button>
-  </motion.div>
-)}
-
-      <motion.button
-        type="submit"
-        className="relative w-full px-6 py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white font-semibold rounded-xl backdrop-blur-sm border border-indigo-500/20 shadow-2xl overflow-hidden group"
-        whileHover={{
-          scale: 1.02,
-          boxShadow: "0 20px 40px rgba(99, 102, 241, 0.3)",
-        }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ duration: 0.2 }}
-        disabled={isSubmitting}
-        aria-busy={isSubmitting}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-
-        <span className="relative z-10">
-          {isSubmitting ? (
-            <>
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-              Sending...
-            </>
-          ) : (
-            "Send Message"
-          )}
-        </span>
-
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-200 blur-xl"></div>
-      </motion.button>
     </form>
   );
 };

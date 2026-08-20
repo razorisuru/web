@@ -1,0 +1,106 @@
+/* Hallmark — portable design tokens
+ * Project: razorisuru.com · Isuru Bandara, full-stack engineer portfolio
+ * Theme:   custom, dual-band · vibe: "systems manual, ruled, one signal ink"
+ * Axes:    dual (dark 14% / light 98.5%) / geometric-sans / cool
+ *
+ * The live copy of these lives in src/index.css, where they are bridged into
+ * Tailwind v4 via `@theme inline` so every utility follows [data-theme].
+ * This file is the drop-in export for reuse elsewhere.
+ */
+
+:root {
+  /* ── Colour · light band ───────────────────────────────── */
+  --color-paper:      oklch(98.5% 0.006 264);
+  --color-paper-2:    oklch(96.4% 0.006 264);
+  --color-paper-3:    oklch(93.6% 0.008 264);
+  --color-ink:        oklch(18%   0.020 264);
+  --color-ink-2:      oklch(34%   0.018 264);
+  --color-muted:      oklch(50%   0.016 264);
+  --color-rule:       oklch(87%   0.008 264);
+  --color-rule-2:     oklch(92.5% 0.006 264);
+  --color-accent:     oklch(47%   0.190 264);
+  --color-accent-ink: oklch(98.5% 0.006 264);
+  --color-focus:      oklch(52%   0.210 264);
+  --color-danger:     oklch(52%   0.190 27);
+
+  /* ── Type ──────────────────────────────────────────────── */
+  /* Two families, no outlier. The label / small-caps voice is the display
+     face at --text-xs, uppercase, tracked --tracking-label. */
+  --font-display: "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --body-weight:  400;
+  --display-weight: 700;
+  --tracking-display: -0.03em;
+  --tracking-label: 0.09em;
+
+  /* Major third, 1.25, from a 16px body */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-md:   1.25rem;
+  --text-lg:   1.5625rem;
+  --text-xl:   1.9531rem;
+  --text-2xl:  2.4414rem;
+  --text-3xl:  3.0518rem;
+  --text-display:   clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-display-s: clamp(2rem, 3.2vw + 0.75rem, 3.25rem);
+
+  /* ── Space · 4pt, named by role ────────────────────────── */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  /* ── Motion ────────────────────────────────────────────── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 200ms;
+  --dur-long:  420ms;
+
+  /* ── Shape ─────────────────────────────────────────────── */
+  --radius-card:  0;
+  --radius-pill:  0;
+  --radius-input: 0;
+  --rule-hair: 1px;
+  --rule-heavy: 2px;
+  --shadow-card: none;
+
+  /* ── Z · six named levels ──────────────────────────────── */
+  --z-base: 1;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  --shell: 1280px;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+}
+
+/* ── Colour · dark band ──────────────────────────────────────
+   Hue never moves; only lightness and chroma. Elevation goes
+   lighter, not darker. Body weight steps down 50 units because
+   light text on a dark ground gains optical weight.           */
+[data-theme="dark"] {
+  --color-paper:      oklch(14%   0.012 264);
+  --color-paper-2:    oklch(17.5% 0.014 264);
+  --color-paper-3:    oklch(21%   0.016 264);
+  --color-ink:        oklch(95%   0.008 264);
+  --color-ink-2:      oklch(78%   0.010 264);
+  --color-muted:      oklch(64%   0.014 264);
+  --color-rule:       oklch(30%   0.014 264);
+  --color-rule-2:     oklch(24%   0.012 264);
+  --color-accent:     oklch(72%   0.155 264);
+  --color-accent-ink: oklch(14%   0.020 264);
+  --color-focus:      oklch(78%   0.180 264);
+  --color-danger:     oklch(72%   0.160 27);
+  --body-weight: 350;
+}

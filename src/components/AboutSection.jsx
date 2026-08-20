@@ -1,45 +1,38 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { FiDownload } from "react-icons/fi";
 
-const AboutSection = ({ theme, id }) => {
+const facts = [
+  { key: "Full Name", value: "Isuru Bandara Weerakoon" },
+  { key: "Email", value: "isurubandara318@gmail.com", href: "mailto:isurubandara318@gmail.com" },
+  { key: "Work", value: "SE 360 Productions Group (pvt) Ltd." },
+  { key: "Location", value: "Colombo, Sri Lanka" },
+];
+
+const figures = [
+  { num: "50+", name: "Projects Completed", note: "Websites, apps, and designs" },
+  { num: "15+", name: "Happy Clients", note: "Worldwide satisfaction" },
+  { num: "5+", name: "Years Experience", note: "Building digital products" },
+];
+
+/**
+ * Section head pattern used on every band: the 2px ink rule, then the heading,
+ * then the section label underneath as a caption. Heading-first is deliberate —
+ * an uppercase kicker above a heading is the eyebrow tic, and a tag-left /
+ * heading-right split is worse. Single column at every width.
+ */
+const AboutSection = ({ id }) => {
   return (
-    <section id={id} className="py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <motion.div
-            className="inline-block text-indigo-500 font-medium mb-2"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.25 }}
-          >
-            About Me
-          </motion.div>
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.05, duration: 0.25 }}
-          >
-            My Journey
-          </motion.h2>
+    <section id={id} className="hm-band hm-band--normal">
+      <div className="hm-shell">
+        <div className="hm-head">
+          <h2 className="hm-head__title">My Journey</h2>
+          <p className="hm-label">About Me</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <motion.div
-            className="lg:col-span-2"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            <h3 className="text-xl font-bold mb-4">Who I Am</h3>
-            <p
-              className={`mb-4 ${
-                theme === "dark" ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
+          <div>
+            <h3 className="text-xl mb-4">Who I Am</h3>
+
+            <p className="max-w-[65ch] text-ink-2 mb-4">
               I am a Software Engineer with a BSc in Information Technology,
               graduating with a GPA of 3.76. I focus on developing efficient,
               scalable, and user-friendly software solutions, backed by strong
@@ -49,239 +42,49 @@ const AboutSection = ({ theme, id }) => {
               continuous improvement and delivering meaningful digital
               experiences.
             </p>
-            <p
-              className={`mb-6 ${
-                theme === "dark" ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
+            <p className="max-w-[65ch] text-ink-2 mb-8">
               My journey began in university where I discovered my love for
-              coding and design. Since then, I've worked with startups and
+              coding and design. Since then, I&rsquo;ve worked with startups and
               established companies to build digital products that users love.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <div className="flex items-center mb-1">
-                  <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
-                  <span className="font-medium">Full Name:</span>
+            <dl className="hm-spec mb-8">
+              {facts.map((fact) => (
+                <div className="hm-spec__row" key={fact.key}>
+                  <dt className="hm-spec__key hm-label">{fact.key}</dt>
+                  <dd className="hm-spec__val">
+                    {fact.href ? (
+                      <a href={fact.href} className="hm-tlink">
+                        {fact.value}
+                      </a>
+                    ) : (
+                      fact.value
+                    )}
+                  </dd>
                 </div>
-                <p>Isuru Bandara Weerakoon</p>
-              </div>
-              <div>
-                <div className="flex items-center mb-1">
-                  <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
-                  <span className="font-medium">Email:</span>
-                </div>
-                <p>isurubandara318@gmail.com</p>
-              </div>
-              
-              <div>
-                <div className="flex items-center mb-1">
-                  <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
-                  <span className="font-medium">Work:</span>
-                </div>
-                <p>SE 360 Productions Group (pvt) Ltd.</p>
-              </div>
-              <div>
-                <div className="flex items-center mb-1">
-                  <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
-                  <span className="font-medium">Location:</span>
-                </div>
-                <p>Kandy, Sri Lanka</p>
-              </div>
-             
-            </div>
+              ))}
+            </dl>
 
-            <motion.a
+            <a
               href="/isuru-bandara-cv.pdf"
-              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="hm-btn"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Download CV
-              <svg
-                className="ml-2 w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                ></path>
-              </svg>
-            </motion.a>
-          </motion.div>
+              <FiDownload size={16} aria-hidden="true" />
+            </a>
+          </div>
 
-          <motion.div
-            className="flex flex-col gap-8"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
-            <motion.div
-              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-200 overflow-hidden cursor-pointer ${
-                theme === "dark"
-                  ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
-                  : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
-              } shadow-2xl hover:shadow-3xl`}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.15 },
-              }}
-            >
-              {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 p-[1px]">
-                <div
-                  className={`w-full h-full rounded-3xl ${
-                    theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
-                  } backdrop-blur-lg`}
-                ></div>
+          <div>
+            {figures.map((figure) => (
+              <div className="hm-stat" key={figure.name}>
+                <span className="hm-stat__num">{figure.num}</span>
+                <h4 className="hm-stat__name">{figure.name}</h4>
+                <p className="hm-stat__note">{figure.note}</p>
               </div>
-
-              {/* Floating background orb */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-indigo-400/30 to-purple-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-
-              <div className="relative z-10">
-                <motion.div
-                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-200"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
-                >
-                  50+
-                </motion.div>
-                <h4
-                  className={`text-lg font-semibold mb-1 transition-all duration-200 ${
-                    theme === "dark" ? "text-white" : "text-gray-800"
-                  } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:to-purple-500 group-hover:bg-clip-text`}
-                >
-                  Projects Completed
-                </h4>
-                <p
-                  className={`text-sm ${
-                    theme === "dark" ? "text-gray-400" : "text-gray-500"
-                  } group-hover:text-opacity-90 transition-all duration-200`}
-                >
-                  Websites, apps, and designs
-                </p>
-              </div>
-
-              {/* Glass shine effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
-            </motion.div>
-
-            <motion.div
-              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-200 overflow-hidden cursor-pointer ${
-                theme === "dark"
-                  ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
-                  : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
-              } shadow-2xl hover:shadow-3xl`}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.15 },
-              }}
-            >
-              {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 p-[1px]">
-                <div
-                  className={`w-full h-full rounded-3xl ${
-                    theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
-                  } backdrop-blur-lg`}
-                ></div>
-              </div>
-
-              {/* Floating background orb */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-
-              <div className="relative z-10">
-                <motion.div
-                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-200"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                >
-                  15+
-                </motion.div>
-                <h4
-                  className={`text-lg font-semibold mb-1 transition-all duration-200 ${
-                    theme === "dark" ? "text-white" : "text-gray-800"
-                  } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:bg-clip-text`}
-                >
-                  Happy Clients
-                </h4>
-                <p
-                  className={`text-sm ${
-                    theme === "dark" ? "text-gray-400" : "text-gray-500"
-                  } group-hover:text-opacity-90 transition-all duration-200`}
-                >
-                  Worldwide satisfaction
-                </p>
-              </div>
-
-              {/* Glass shine effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
-            </motion.div>
-
-            <motion.div
-              className={`group relative p-6 rounded-3xl backdrop-blur-lg border transition-all duration-200 overflow-hidden cursor-pointer ${
-                theme === "dark"
-                  ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
-                  : "bg-white/20 border-white/30 hover:bg-white/30 hover:border-white/40"
-              } shadow-2xl hover:shadow-3xl`}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.15 },
-              }}
-            >
-              {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-500 p-[1px]">
-                <div
-                  className={`w-full h-full rounded-3xl ${
-                    theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
-                  } backdrop-blur-lg`}
-                ></div>
-              </div>
-
-              {/* Floating background orb */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-cyan-400/30 to-blue-400/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-
-              <div className="relative z-10">
-                <motion.div
-                  className="text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-200"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.25 }}
-                >
-                  5+
-                </motion.div>
-                <h4
-                  className={`text-lg font-semibold mb-1 transition-all duration-200 ${
-                    theme === "dark" ? "text-white" : "text-gray-800"
-                  } group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-500 group-hover:bg-clip-text`}
-                >
-                  Years Experience
-                </h4>
-                <p
-                  className={`text-sm ${
-                    theme === "dark" ? "text-gray-400" : "text-gray-500"
-                  } group-hover:text-opacity-90 transition-all duration-200`}
-                >
-                  Building digital products
-                </p>
-              </div>
-
-              {/* Glass shine effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
-            </motion.div>
-          </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

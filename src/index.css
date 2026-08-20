@@ -1,58 +1,983 @@
-/* src/index.css */
+/* Hallmark · genre: editorial · macrostructure: Index-First (deviation: H2 split-diptych opener)
+ * theme: custom · vibe: "systems manual, ruled, one signal ink"
+ * paper: oklch(98.5% 0.006 264) light / oklch(14% 0.012 264) dark
+ * accent: oklch(47% 0.19 264) light / oklch(72% 0.155 264) dark
+ * display: Space Grotesk 700 · body: IBM Plex Sans · families: 2 (no outlier — the
+ *   label voice is the display face at 12px, uppercase, tracked 0.09em)
+ * axes: dual (dark 14% / light 98.5%) / geometric-sans / cool
+ * nav: N6 masthead · footer: Ft4 dense colophon · features: F3 tabular · proof: T4 stat strip
+ * enrichment: none (typography + geometry) · studied: no · context: user-provided
+ * contrast: pass (40-41) · accent footprint: 3.03% worst fold (gate 23)
+ * slop test: 57/58 — gate 30 flagged: UI icons are Feather-only, but the brand
+ *   marks still arrive from react-icons/fa + /si via the frozen src/data files.
+ *   Normalised to one ink so they read as one system; a strict reading still
+ *   counts three source sets. Fixing it properly means editing src/data.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=Space+Grotesk:wght@500;600;700&display=swap");
 @import "tailwindcss";
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+/* ─────────────────────────────────────────────────────────────
+   TOKENS — light band is the base; dark band overrides by role.
+   Hue anchor 264 (ultramarine). No pure #000 / #fff anywhere;
+   every neutral carries chroma toward the anchor.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --hm-paper:      oklch(98.5% 0.006 264);
+  --hm-paper-2:    oklch(96.4% 0.006 264);
+  --hm-paper-3:    oklch(93.6% 0.008 264);
+  --hm-ink:        oklch(18%   0.020 264);
+  --hm-ink-2:      oklch(34%   0.018 264);
+  --hm-muted:      oklch(50%   0.016 264);
+  --hm-rule:       oklch(87%   0.008 264);
+  --hm-rule-2:     oklch(92.5% 0.006 264);
+  --hm-accent:     oklch(47%   0.190 264);
+  --hm-accent-ink: oklch(98.5% 0.006 264);
+  --hm-focus:      oklch(52%   0.210 264);
+  /* Second and last hue on the page. Validation only — never decoration,
+     and never the sole signal: errors also carry an icon and a heavier rule. */
+  --hm-danger:     oklch(52%   0.190 27);
+
+  /* Type */
+  --hm-font-display: "Space Grotesk", ui-sans-serif, sans-serif;
+  --hm-font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  /* No third family. The label / machine-data voice is the display face at
+     small size, uppercase and tracked — an outlier used in a dozen slots is
+     just a third body font. */
+  --hm-body-weight:  400;
+
+  --hm-text-xs:    0.75rem;
+  --hm-text-sm:    0.875rem;
+  --hm-text-base:  1rem;
+  --hm-text-md:    1.25rem;
+  --hm-text-lg:    1.5625rem;
+  --hm-text-xl:    1.9531rem;
+  --hm-text-2xl:   2.4414rem;
+  --hm-text-3xl:   3.0518rem;
+  --hm-display:    clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --hm-display-s:  clamp(2rem, 3.2vw + 0.75rem, 3.25rem);
+
+  /* 4pt scale, named by role */
+  --hm-space-3xs: 0.125rem;
+  --hm-space-2xs: 0.25rem;
+  --hm-space-xs:  0.5rem;
+  --hm-space-sm:  0.75rem;
+  --hm-space-md:  1rem;
+  --hm-space-lg:  1.5rem;
+  --hm-space-xl:  2.5rem;
+  --hm-space-2xl: 4rem;
+  --hm-space-3xl: 6rem;
+  --hm-space-4xl: 9rem;
+
+  /* Motion */
+  --hm-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --hm-ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --hm-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --hm-dur-micro: 120ms;
+  --hm-dur-short: 200ms;
+  --hm-dur-long:  420ms;
+
+  /* Z-scale — six named levels, never freestyle */
+  --hm-z-base: 1;
+  --hm-z-raised: 10;
+  --hm-z-dropdown: 100;
+  --hm-z-sticky: 200;
+  --hm-z-modal: 400;
+  --hm-z-toast: 500;
+
+  --hm-shell: 1280px;
+  --hm-gutter: clamp(1rem, 4vw, 3.5rem);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --hm-paper:      oklch(14%   0.012 264);
+  --hm-paper-2:    oklch(17.5% 0.014 264);
+  --hm-paper-3:    oklch(21%   0.016 264);
+  --hm-ink:        oklch(95%   0.008 264);
+  --hm-ink-2:      oklch(78%   0.010 264);
+  --hm-muted:      oklch(64%   0.014 264);
+  --hm-rule:       oklch(30%   0.014 264);
+  --hm-rule-2:     oklch(24%   0.012 264);
+  --hm-accent:     oklch(72%   0.155 264);
+  --hm-accent-ink: oklch(14%   0.020 264);
+  --hm-focus:      oklch(78%   0.180 264);
+  --hm-danger:     oklch(72%   0.160 27);
+  /* Light text on dark optically gains weight — step the body down. */
+  --hm-body-weight: 350;
+  color-scheme: dark;
+}
+
+/* Tailwind v4 bridge. `inline` keeps the var() reference in the emitted
+   utility, so `bg-paper` follows [data-theme] at runtime. */
+@theme inline {
+  --color-paper:      var(--hm-paper);
+  --color-paper-2:    var(--hm-paper-2);
+  --color-paper-3:    var(--hm-paper-3);
+  --color-ink:        var(--hm-ink);
+  --color-ink-2:      var(--hm-ink-2);
+  --color-muted:      var(--hm-muted);
+  --color-rule:       var(--hm-rule);
+  --color-rule-2:     var(--hm-rule-2);
+  --color-accent:     var(--hm-accent);
+  --color-accent-ink: var(--hm-accent-ink);
+  --color-focus:      var(--hm-focus);
+  --color-danger:     var(--hm-danger);
+
+  --font-display: var(--hm-font-display);
+  --font-body:    var(--hm-font-body);
+
+  --ease-out:    var(--hm-ease-out);
+  --ease-in:     var(--hm-ease-in);
+  --ease-in-out: var(--hm-ease-in-out);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────────────────────────── */
+html {
+  overflow-x: clip;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  /* The navbar is sticky in desktop & mobile — keep anchored sections clear of it. */
+  scroll-padding-top: clamp(6.5rem, 12vw, 8.5rem);
+}
+
+body {
+  overflow-x: clip;
+  background: var(--hm-paper);
+  color: var(--hm-ink);
+  font-family: var(--hm-font-body);
+  font-size: var(--hm-text-base);
+  font-weight: var(--hm-body-weight);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--hm-font-display);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+::selection {
+  background: var(--hm-accent);
+  color: var(--hm-accent-ink);
+}
+
+/* Focus is instant and never animated. */
+:focus-visible {
+  outline: 2px solid var(--hm-focus);
+  outline-offset: 2px;
+  border-radius: 0;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--hm-paper-2); }
+::-webkit-scrollbar-thumb { background: var(--hm-rule); border: 2px solid var(--hm-paper-2); }
+::-webkit-scrollbar-thumb:hover { background: var(--hm-muted); }
+
+/* ─────────────────────────────────────────────────────────────
+   THE GROUND — exposed 12-column hairline grid.
+   Structural, not decoration. Replaces the particle canvas.
+   ───────────────────────────────────────────────────────────── */
+.hm-rails {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  max-width: var(--hm-shell);
+  margin-inline: auto;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--hm-rule-2) 0,
+    var(--hm-rule-2) 1px,
+    transparent 1px,
+    transparent calc(100% / 6)
+  );
+}
+@media (min-width: 60rem) {
+  .hm-rails {
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--hm-rule-2) 0,
+      var(--hm-rule-2) 1px,
+      transparent 1px,
+      transparent calc(100% / 12)
+    );
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SHELL + BANDS
+   ───────────────────────────────────────────────────────────── */
+.hm-shell {
+  max-width: var(--hm-shell);
+  margin-inline: auto;
+  padding-inline: var(--hm-gutter);
+  position: relative;
+  z-index: var(--hm-z-base);
+}
+
+.hm-band { position: relative; z-index: var(--hm-z-base); }
+
+/* Rhythm is deliberately uneven — bands do not share padding. */
+.hm-band--tight  { padding-block: var(--hm-space-xl) var(--hm-space-2xl); }
+/* The opener sits INTO the page: bottom padding ~2.4x the top. */
+.hm-band--open-top { padding-block: var(--hm-space-lg) var(--hm-space-3xl); }
+.hm-band--normal { padding-block: var(--hm-space-3xl) var(--hm-space-2xl); }
+.hm-band--open   { padding-block: var(--hm-space-4xl) var(--hm-space-3xl); }
+
+/* ─────────────────────────────────────────────────────────────
+   N6 · MASTHEAD + sticky link rail.
+   Sticky navigation header across desktop and mobile views.
+   ───────────────────────────────────────────────────────────── */
+.hm-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--hm-z-sticky);
+  background: var(--hm-paper);
+}
+
+.hm-mast {
+  position: relative;
+  background: var(--hm-paper);
+  padding-block: var(--hm-space-lg) var(--hm-space-sm);
+}
+.hm-mast__row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--hm-space-sm);
+}
+.hm-mast__name {
+  grid-column: 2;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hm-space-sm);
+  font-family: var(--hm-font-display);
+  font-weight: 700;
+  font-size: clamp(1.375rem, 4.2vw, 2.25rem);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--hm-ink);
+  text-decoration: none;
+}
+.hm-mast__mark {
+  width: clamp(1.75rem, 5vw, 2.5rem);
+  height: clamp(1.75rem, 5vw, 2.5rem);
+  object-fit: contain;
+  flex: none;
+}
+.hm-mast__aside { grid-column: 3; justify-self: end; }
+
+/* Double rule — the broadsheet close under the flag. */
+.hm-rule-double {
+  border: 0;
+  border-top: 1px solid var(--hm-ink);
+  border-bottom: 1px solid var(--hm-ink);
+  height: 3px;
+  margin: 0;
+}
+
+.hm-rail {
+  position: sticky;
+  top: 0;
+  z-index: var(--hm-z-sticky);
+  background: var(--hm-paper);
+  border-bottom: 1px solid var(--hm-ink);
+}
+.hm-rail__inner {
+  display: flex;
+  align-items: stretch;
+  gap: var(--hm-space-lg);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.hm-rail__inner::-webkit-scrollbar { display: none; }
+.hm-rail__link {
+  font-family: var(--hm-font-display);
+  font-size: var(--hm-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--hm-muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color var(--hm-dur-micro) var(--hm-ease-out),
+              border-color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-rail__link:hover { color: var(--hm-ink); }
+.hm-rail__link[aria-current="true"] {
+  color: var(--hm-accent);
+  border-bottom-color: var(--hm-accent);
+}
+
+/* Theme toggle — square, hairline, mono label. */
+.hm-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: var(--hm-font-display);
+  font-size: var(--hm-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--hm-muted);
+  background: transparent;
+  border: 1px solid var(--hm-rule);
+  border-radius: 0;
+  padding: 0 var(--hm-space-sm);
+  min-height: 40px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--hm-dur-micro) var(--hm-ease-out),
+              border-color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-toggle:hover { color: var(--hm-ink); border-color: var(--hm-ink); }
+.hm-toggle__label { display: none; }
+@media (min-width: 40rem) {
+  .hm-toggle__label { display: inline; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION HEAD — 2px ink rule, heading flush left, descriptor
+   underneath in body voice. Single column at every width.
+   No eyebrow, no kicker, no tag-left/heading-right.
+   ───────────────────────────────────────────────────────────── */
+.hm-head {
+  border-top: 2px solid var(--hm-ink);
+  padding-top: var(--hm-space-md);
+  margin-bottom: var(--hm-space-xl);
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+.hm-head__title {
+  font-size: var(--hm-display-s);
+  margin: 0;
+}
+.hm-head__desc {
+  font-family: var(--hm-font-body);
+  font-size: var(--hm-text-base);
+  color: var(--hm-muted);
+  max-width: 52ch;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   H2 · SPLIT DIPTYCH opener. 7/5, divided by a hairline.
+   The one place on the page that carries display type.
+   ───────────────────────────────────────────────────────────── */
+.hm-hero__grid {
+  display: grid;
+  gap: var(--hm-space-xl);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 60rem) {
+  .hm-hero__grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--hm-space-2xl);
+    align-items: start;
+  }
+  .hm-hero__aside {
+    border-inline-start: 1px solid var(--hm-rule);
+    padding-inline-start: var(--hm-space-xl);
+  }
+}
+.hm-hero__aside {
+  border-top: 1px solid var(--hm-rule);
+  padding-top: var(--hm-space-lg);
+}
+@media (min-width: 60rem) {
+  .hm-hero__aside { border-top: 0; padding-top: 0; }
+}
+
+.hm-hero__title {
+  font-size: var(--hm-display);
+  margin: 0 0 var(--hm-space-md);
+}
+.hm-hero__lede {
+  max-width: 62ch;
+  color: var(--hm-ink-2);
+  margin: 0 0 var(--hm-space-xl);
+}
+
+/* The five roles, set as a static ruled index — every one visible. */
+.hm-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--hm-space-sm);
+  list-style: none;
+  margin: 0 0 var(--hm-space-lg);
+  padding: 0;
+}
+.hm-roles li {
+  font-family: var(--hm-font-display);
+  font-size: var(--hm-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hm-ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hm-space-sm);
+}
+.hm-roles li:not(:last-child)::after {
+  content: "";
+  width: 1px;
+  height: 0.9em;
+  background: var(--hm-rule);
+}
+
+.hm-figure {
+  margin: 0;
+  border: 1px solid var(--hm-rule);
+  background: var(--hm-paper-2);
+}
+.hm-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.hm-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hm-space-xs);
+  margin-top: var(--hm-space-sm);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LABEL + MACHINE-DATA VOICE (the mono outlier's single role)
+   ───────────────────────────────────────────────────────────── */
+.hm-label {
+  font-family: var(--hm-font-display);
+  font-size: var(--hm-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--hm-muted);
+}
+.hm-num {
+  font-family: var(--hm-font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* The period square — smallest mark in the kit. */
+.hm-sq {
+  display: inline-block;
+  width: 0.52em;
+  height: 0.52em;
+  background: var(--hm-accent);
+  flex: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   INDEX ROWS — the page's primary structure. Hairlines, no cards.
+   ───────────────────────────────────────────────────────────── */
+.hm-rows {
+  border-top: 1px solid var(--hm-rule);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hm-row {
+  border-bottom: 1px solid var(--hm-rule);
+  position: relative;
+}
+.hm-row__inner {
+  display: grid;
+  gap: var(--hm-space-sm) var(--hm-space-lg);
+  padding-block: var(--hm-space-lg);
+  align-items: start;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hm-row:hover { background: var(--hm-paper-2); }
+}
+.hm-row:focus-within { background: var(--hm-paper-2); }
+
+/* ─────────────────────────────────────────────────────────────
+   F3 · TABULAR SPEC SHEET — key/value rows on hairlines.
+   Used for the about facts, the skills index and the résumé.
+   ───────────────────────────────────────────────────────────── */
+.hm-spec {
+  border-top: 1px solid var(--hm-rule);
+  margin: 0;
+}
+.hm-spec__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--hm-space-2xs) var(--hm-space-lg);
+  padding-block: var(--hm-space-sm);
+  border-bottom: 1px solid var(--hm-rule);
+  align-items: baseline;
+}
+@media (min-width: 40rem) {
+  .hm-spec__row { grid-template-columns: 10rem minmax(0, 1fr); }
+}
+.hm-spec__key { margin: 0; }
+.hm-spec__val {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* T4 · Numbered stat strip — tabular figures, hairline separated. */
+.hm-stat {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  padding-block: var(--hm-space-md);
+  border-bottom: 1px solid var(--hm-rule);
+}
+.hm-stat:first-child { border-top: 1px solid var(--hm-rule); }
+.hm-stat__num {
+  font-family: var(--hm-font-display);
+  font-weight: 700;
+  font-size: var(--hm-text-2xl);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--hm-ink);
+}
+.hm-stat__name {
+  font-family: var(--hm-font-body);
+  font-weight: 600;
+  font-size: var(--hm-text-base);
+  letter-spacing: 0;
+  margin: 0;
+}
+.hm-stat__note { color: var(--hm-muted); font-size: var(--hm-text-sm); margin: 0; }
+
+/* Strip variant — the six figures under services, on one row. */
+.hm-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--hm-rule);
+  border-inline-start: 1px solid var(--hm-rule);
+}
+@media (min-width: 40rem) { .hm-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 60rem) { .hm-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.hm-strip__cell {
+  border-inline-end: 1px solid var(--hm-rule);
+  border-bottom: 1px solid var(--hm-rule);
+  padding: var(--hm-space-md);
+  display: grid;
+  gap: var(--hm-space-2xs);
+  align-content: start;
+}
+
+/* The skill meter — a bar on the rule track. No gradient, no shimmer, no
+   radius, no reveal. Renders at full width immediately; it is data. */
+.hm-meter {
+  height: 6px;
+  background: var(--hm-rule);
   width: 100%;
 }
-
-/* Glassmorphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+.hm-meter__fill {
+  height: 100%;
+  background: var(--hm-accent);
 }
 
-/* Custom scrollbar - Light mode default */
-::-webkit-scrollbar {
-  width: 8px;
+.hm-skills {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: var(--hm-space-2xl);
+  border-top: 1px solid var(--hm-rule);
+}
+@media (min-width: 48rem) {
+  .hm-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.hm-skill {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr) 3.25rem;
+  align-items: center;
+  gap: var(--hm-space-xs) var(--hm-space-sm);
+  padding-block: var(--hm-space-md);
+  border-bottom: 1px solid var(--hm-rule);
+}
+/* Brand marks arrive from src/data/skills.jsx at 32px in their own brand
+   colours. This page spends exactly one signal ink, so the index sets them
+   monochrome and normalises the size — the row, not the logo, is the object.
+   These rules are unlayered, so they beat the data file's Tailwind classes. */
+.hm-skill__icon {
+  display: grid;
+  place-items: center;
+  line-height: 0;
+}
+.hm-skill__icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--hm-ink-2);
+  transition: color var(--hm-dur-micro) var(--hm-ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hm-skill:hover .hm-skill__icon svg { color: var(--hm-accent); }
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+/* Same normalisation for the service marks (src/data/services.jsx ships
+   them at 36px in indigo). Inline with the heading, never stacked above it. */
+.hm-service__icon { display: inline-grid; place-items: center; line-height: 0; }
+.hm-service__icon svg {
+  width: 1.375rem;
+  height: 1.375rem;
+  color: var(--hm-accent);
+}
+.hm-skill__name {
+  font-family: var(--hm-font-body);
+  font-weight: 600;
+  font-size: var(--hm-text-base);
+  letter-spacing: 0;
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.hm-skill__pct {
+  justify-self: end;
+  font-family: var(--hm-font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--hm-text-sm);
+  font-weight: 500;
+  color: var(--hm-muted);
+}
+.hm-skill__meter { grid-column: 2 / -1; }
+
+/* ─────────────────────────────────────────────────────────────
+   RÉSUMÉ ENTRIES — index rows, no timeline dots, no gradient rail.
+   ───────────────────────────────────────────────────────────── */
+.hm-entry {
+  border-bottom: 1px solid var(--hm-rule);
+  padding-block: var(--hm-space-lg);
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+.hm-entry__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hm-space-xs) var(--hm-space-md);
+}
+.hm-entry__title {
+  font-size: var(--hm-text-md);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.hm-entry__org {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 600;
+  font-size: var(--hm-text-sm);
+  color: var(--hm-ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hm-rule);
+  align-self: start;
+  justify-self: start;
+  transition: color var(--hm-dur-micro) var(--hm-ease-out),
+              border-color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-entry__org:hover { color: var(--hm-accent); border-bottom-color: var(--hm-accent); }
+.hm-entry__body {
+  margin: 0;
+  color: var(--hm-muted);
+  font-size: var(--hm-text-sm);
+  max-width: 68ch;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+/* ─────────────────────────────────────────────────────────────
+   PROJECT INDEX — numbered rows with a plate-sized thumbnail.
+   Images are always visible; nothing is hover-only.
+   ───────────────────────────────────────────────────────────── */
+.hm-project {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 48rem) {
+  .hm-project {
+    grid-template-columns: 2.5rem 8.5rem minmax(0, 1fr) auto;
+    align-items: start;
+  }
+}
+.hm-project__num {
+  font-family: var(--hm-font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--hm-text-xs);
+  font-weight: 500;
+  color: var(--hm-muted);
+  padding-top: 0.35em;
+}
+.hm-project__thumb {
+  margin: 0;
+  border: 1px solid var(--hm-rule);
+  background: var(--hm-paper-2);
+  max-width: 14rem;
+}
+.hm-project__thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.hm-project__title {
+  font-size: var(--hm-text-md);
+  margin: 0 0 var(--hm-space-2xs);
+  letter-spacing: -0.02em;
+}
+.hm-project__desc {
+  margin: 0 0 var(--hm-space-sm);
+  color: var(--hm-muted);
+  font-size: var(--hm-text-sm);
+  max-width: 60ch;
+}
+.hm-project__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-2xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hm-project__acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-md);
+  padding-top: var(--hm-space-2xs);
+}
+@media (min-width: 48rem) {
+  .hm-project__acts { flex-direction: column; gap: var(--hm-space-xs); }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+/* ─────────────────────────────────────────────────────────────
+   CTAs — solid ink block, outlined chip, typographic link.
+   Zero radius everywhere. Affordances never wrap.
+   ───────────────────────────────────────────────────────────── */
+.hm-btn,
+.hm-chip,
+.hm-tlink {
+  white-space: nowrap;
+  font-family: var(--hm-font-body);
+  font-weight: 600;
+  font-size: var(--hm-text-sm);
+  letter-spacing: 0.01em;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hm-space-xs);
+  cursor: pointer;
+  text-decoration: none;
 }
 
-/* Custom scrollbar - Dark mode */
-[data-theme="dark"] ::-webkit-scrollbar-track,
-[data-theme="dark"]::-webkit-scrollbar-track {
-  background: #1a202c;
+.hm-btn {
+  background: var(--hm-ink);
+  color: var(--hm-paper);
+  border: 1px solid var(--hm-ink);
+  padding: var(--hm-space-sm) var(--hm-space-lg);
+  min-height: 44px;
+  transition: background-color var(--hm-dur-micro) var(--hm-ease-out),
+              border-color var(--hm-dur-micro) var(--hm-ease-out),
+              color var(--hm-dur-micro) var(--hm-ease-out),
+              transform var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-btn:hover { background: var(--hm-accent); border-color: var(--hm-accent); color: var(--hm-accent-ink); }
+.hm-btn:active { transform: translateY(1px); }
+.hm-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.hm-chip {
+  background: transparent;
+  color: var(--hm-ink);
+  border: 1px solid var(--hm-rule);
+  padding: var(--hm-space-sm) var(--hm-space-lg);
+  min-height: 44px;
+  transition: border-color var(--hm-dur-micro) var(--hm-ease-out),
+              color var(--hm-dur-micro) var(--hm-ease-out),
+              transform var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-chip:hover { border-color: var(--hm-accent); color: var(--hm-accent); }
+.hm-chip:active { transform: translateY(1px); }
+
+.hm-tlink {
+  color: var(--hm-ink);
+  border-bottom: 1px solid var(--hm-rule);
+  padding-bottom: 1px;
+  transition: border-color var(--hm-dur-micro) var(--hm-ease-out),
+              color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-tlink:hover { color: var(--hm-accent); border-bottom-color: var(--hm-accent); }
+
+/* Mono micro-action used inside index rows. */
+.hm-act {
+  font-family: var(--hm-font-display);
+  font-size: var(--hm-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--hm-muted);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  border-bottom: 1px solid transparent;
+  padding-block: 2px;
+  transition: color var(--hm-dur-micro) var(--hm-ease-out),
+              border-color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-act:hover { color: var(--hm-accent); border-bottom-color: var(--hm-accent); }
+
+/* Tag — hairline, not a filled pill. */
+.hm-tag {
+  font-family: var(--hm-font-display);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hm-ink-2);
+  border: 1px solid var(--hm-rule);
+  padding: 0.15em 0.5em;
+  white-space: nowrap;
 }
 
-[data-theme="dark"] ::-webkit-scrollbar-thumb,
-[data-theme="dark"]::-webkit-scrollbar-thumb {
-  background: #4a5568;
+/* ─────────────────────────────────────────────────────────────
+   THE CLOSING BAND — the page's one heavy move, spent in neutral
+   rather than in ink. The accent stays a signal: active rail
+   item, meters, focus rings, period squares, hover states.
+   Flooding a whole viewport with it would break the ≤5% rule.
+   ───────────────────────────────────────────────────────────── */
+.hm-close {
+  background: var(--hm-paper-3);
+  border-block: 2px solid var(--hm-ink);
 }
 
-[data-theme="dark"] ::-webkit-scrollbar-thumb:hover,
-[data-theme="dark"]::-webkit-scrollbar-thumb:hover {
-  background: #718096;
-}
-
-/* Selection colors */
-::selection {
-  background-color: rgba(99, 102, 241, 0.3);
+/* ─────────────────────────────────────────────────────────────
+   FORM CONTROLS — hairline underline field, no glass, no radius.
+   `currentColor` keeps the field legible on any ground.
+   ───────────────────────────────────────────────────────────── */
+.hm-field {
+  width: 100%;
+  background: transparent;
   color: inherit;
+  font-family: var(--hm-font-body);
+  font-size: var(--hm-text-base);
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklab, currentColor 32%, transparent);
+  border-radius: 0;
+  padding: var(--hm-space-sm) 0;
+  min-height: 44px;
+  outline: 2px solid transparent;   /* reserved so activation shifts nothing */
+  outline-offset: 4px;
+  transition: border-color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-field::placeholder { color: color-mix(in oklab, currentColor 58%, transparent); }
+.hm-field:hover { border-bottom-color: color-mix(in oklab, currentColor 58%, transparent); }
+.hm-field:focus { border-bottom-color: currentColor; }
+.hm-field:focus-visible { outline: 2px solid var(--hm-focus); outline-offset: 4px; }
+/* Border WIDTH never changes between states — only its colour. A width shift
+   moves the field and everything under it. */
+.hm-field[aria-invalid="true"] { border-bottom-color: var(--hm-danger); }
+textarea.hm-field { resize: vertical; min-height: 7rem; }
+
+/* The helper slot is always there, empty or not (gate 39). */
+.hm-fieldnote {
+  display: flex;
+  align-items: center;
+  gap: var(--hm-space-xs);
+  min-height: 1lh;
+  margin: var(--hm-space-2xs) 0 0;
+  font-size: var(--hm-text-sm);
+  color: var(--hm-danger);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Ft4 · DENSE COLOPHON — one small mono block, ragged right.
+   ───────────────────────────────────────────────────────────── */
+.hm-colophon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hm-space-md) var(--hm-space-lg);
+}
+.hm-colophon__mark { width: 2rem; height: 2rem; object-fit: contain; }
+.hm-colophon__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--hm-space-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.hm-colophon__list li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hm-space-sm);
+}
+.hm-colophon__list li:not(:last-child)::after {
+  content: "·";
+  color: var(--hm-rule);
+}
+.hm-colophon__link {
+  font-family: var(--hm-font-display);
+  font-size: var(--hm-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--hm-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-block: 2px;
+  transition: color var(--hm-dur-micro) var(--hm-ease-out),
+              border-color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-colophon__link:hover { color: var(--hm-accent); border-bottom-color: var(--hm-accent); }
+.hm-colophon__legal {
+  font-family: var(--hm-font-display);
+  font-size: var(--hm-text-xs);
+  color: var(--hm-muted);
+  margin: 0;
+  margin-inline-start: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MOTION — one orchestrated entrance, on the opener only.
+   Nothing below the fold reveals on scroll.
+   ───────────────────────────────────────────────────────────── */
+.hm-enter {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hm-enter var(--hm-dur-long) var(--hm-ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes hm-enter {
+  to { opacity: 1; transform: none; }
+}
+@keyframes hm-enter-reduced {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 150ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+  }
+  .hm-enter { transform: none; animation: hm-enter-reduced 150ms linear forwards; }
 }

@@ -31,7 +31,7 @@ export const allProjects = [
   {
     title: "Jack Fruit Ceylon Website",
     description:
-      "Website for local product Jackfruit Ceylon, built with Next.js, PostgreSQL, Redis, MinIO S3, and Docker. It features a modern design, responsive layout, and optimized performance for showcasing the product and engaging users.",
+      "Official website for Jack Fruit Ceylon (PVT) LTD, built with Next.js, PostgreSQL, Redis, MinIO S3, and Docker. It showcases premium Sri Lankan jackfruit products with a modern, responsive design, fast performance, and an optimized user experience.",
     tags: ["Next.js", "PostgreSQL", "Redis", "MinIO S3", "Docker"],
     link: "https://www.jackfruitceylon.com",
     source: "#",
@@ -47,7 +47,7 @@ export const allProjects = [
     image:
       "https://raw.githubusercontent.com/razorisuru/razor-torrent-grabber/30f8d024e5c9e5b7c9991493db2f1f47024efdbe/public/og-image.jpg",
   },
-   {
+  {
     title: "Angular CRUD with Laravel API",
     description:
       "A full-stack project combining Angular for the frontend and Laravel for the backend. It implements CRUD operations, showcasing seamless integration and efficient communication between the client and server.",

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FiArrowUp } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -149,15 +150,29 @@ function App() {
 
       <Footer ScrollLink={ScrollLink} theme={theme} />
 
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          aria-label="Scroll to top"
-          className="hm-btn fixed bottom-6 right-6 z-[200] !px-3"
+      <div className="fixed bottom-6 right-6 z-[200] flex flex-col items-end gap-3">
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            className="hm-btn !px-3"
+            title="Scroll to top"
+          >
+            <FiArrowUp size={18} aria-hidden="true" />
+          </button>
+        )}
+
+        <a
+          href="https://wa.me/94766008527"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact on WhatsApp (0766008527)"
+          title="Chat on WhatsApp: 0766008527"
+          className="hm-btn !px-3 !bg-[#25D366] !text-white !border-[#25D366] hover:!bg-[#20ba59] hover:!border-[#20ba59] transition-transform hover:scale-105"
         >
-          <FiArrowUp size={18} aria-hidden="true" />
-        </button>
-      )}
+          <FaWhatsapp size={20} aria-hidden="true" />
+        </a>
+      </div>
     </div>
   );
 }

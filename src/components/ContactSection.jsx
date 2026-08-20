@@ -9,7 +9,7 @@ import {
 import ContactForm from "./ContactForm";
 
 const channels = [
-  { label: "Mobile", value: "0766008527", icon: FiPhone, href: null },
+  { label: "Mobile", value: "0766008527", icon: FiPhone, href: "tel:0766008527" },
   {
     label: "Email",
     value: "isurubandara318@gmail.com",

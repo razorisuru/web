@@ -13,12 +13,19 @@ import {
   SiNextdotjs,
   SiMysql,
   SiExpress,
+  SiTypescript,
+  SiPostgresql,
 } from "react-icons/si";
 
 export const skills = [
   {
     name: "JavaScript",
     icon: <SiJavascript className="text-yellow-500" size={32} />,
+    level: 90,
+  },
+   {
+    name: "Typescript",
+    icon: <SiTypescript className="text-yellow-500" size={32} />,
     level: 90,
   },
   {
@@ -86,6 +93,11 @@ export const skills = [
   {
     name: "Python",
     icon: <FaPython className="text-blue-400" size={32} />,
+    level: 70,
+  },
+  {
+    name: "Postgresql",
+    icon: <SiPostgresql className="text-blue-400" size={32} />,
     level: 70,
   },
 ];

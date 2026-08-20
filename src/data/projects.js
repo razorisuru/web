@@ -10,6 +10,15 @@ export const allProjects = [
       "https://raw.githubusercontent.com/razorisuru/LocalShare-web/refs/heads/main/og-image.png",
   },
   {
+    title: "Wilderness Bliss Hotel CMS",
+    description:
+      "full-featured hotel management CMS and Booking Platform  for Wilderness Bliss Hotel, enabling staff to manage rooms, reservations, and content through an intuitive admin interface",
+    tags: ["Next.js", "PostgreSQL", "Redis", "MinIO S3", "Docker"],
+    link: "https://wildernessb.com",
+    source: "#",
+    image: "https://wildernessb.com/og-image.png",
+  },
+  {
     title: "Learning Materials Management System",
     description:
       "A Laravel-based project that facilitates efficient organization, management, and retrieval of educational resources for students and lecturers. It includes features like user management, file categorization, and secure access control.",
@@ -18,6 +27,15 @@ export const allProjects = [
     source:
       "https://github.com/razorisuru/Campus-Material-Library-Management-System",
     image: "/lms.png",
+  },
+  {
+    title: "Jack Fruit Ceylon Website",
+    description:
+      "Website for local product Jackfruit Ceylon, built with Next.js, PostgreSQL, Redis, MinIO S3, and Docker. It features a modern design, responsive layout, and optimized performance for showcasing the product and engaging users.",
+    tags: ["Next.js", "PostgreSQL", "Redis", "MinIO S3", "Docker"],
+    link: "https://www.jackfruitceylon.com",
+    source: "#",
+    image: "https://www.jackfruitceylon.com/og-image.png",
   },
   {
     title: "Torrent Search Engine",
@@ -29,6 +47,15 @@ export const allProjects = [
     image:
       "https://raw.githubusercontent.com/razorisuru/razor-torrent-grabber/30f8d024e5c9e5b7c9991493db2f1f47024efdbe/public/og-image.jpg",
   },
+   {
+    title: "Angular CRUD with Laravel API",
+    description:
+      "A full-stack project combining Angular for the frontend and Laravel for the backend. It implements CRUD operations, showcasing seamless integration and efficient communication between the client and server.",
+    tags: ["AngularJS", "Laravel", "API"],
+    link: "https://github.com/razorisuru/Angular-crud-laravel-API",
+    source: "https://github.com/razorisuru/Angular-crud-laravel-API",
+    image: "https://angular.dev/assets/images/ng-image.jpg",
+  },
   {
     title: "Up Ride Mobile App",
     description:
@@ -37,15 +64,6 @@ export const allProjects = [
     link: "#",
     source: "#",
     image: "/upride.png",
-  },
-  {
-    title: "Angular CRUD with Laravel API",
-    description:
-      "A full-stack project combining Angular for the frontend and Laravel for the backend. It implements CRUD operations, showcasing seamless integration and efficient communication between the client and server.",
-    tags: ["AngularJS", "Laravel", "API"],
-    link: "https://github.com/razorisuru/Angular-crud-laravel-API",
-    source: "https://github.com/razorisuru/Angular-crud-laravel-API",
-    image: "https://angular.dev/assets/images/ng-image.jpg",
   },
   {
     title: "Next Blogger",

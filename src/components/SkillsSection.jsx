@@ -25,8 +25,8 @@ const SkillsSection = ({ theme, id }) => {
                 {skill.needsTheme ? skill.icon(theme) : skill.icon}
               </span>
               <h3 className="hm-skill__name">{skill.name}</h3>
-              <span className="hm-skill__pct">{skill.level}%</span>
-              <div
+              <span className="hm-skill__pct">♾️</span>
+              {/* <div
                 className="hm-meter hm-skill__meter"
                 role="meter"
                 aria-label={`${skill.name} proficiency`}
@@ -38,7 +38,7 @@ const SkillsSection = ({ theme, id }) => {
                   className="hm-meter__fill"
                   style={{ width: `${skill.level}%` }}
                 />
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

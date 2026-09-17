@@ -597,38 +597,51 @@ h1, h2, h3, h4 {
 
 .hm-skills {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  column-gap: var(--hm-space-2xl);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--hm-space-md);
   border-top: 1px solid var(--hm-rule);
 }
 @media (min-width: 48rem) {
-  .hm-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hm-skills {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--hm-space-lg);
+  }
+}
+@media (min-width: 64rem) {
+  .hm-skills {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--hm-space-xl);
+  }
 }
 .hm-skill {
-  display: grid;
-  grid-template-columns: 1.75rem minmax(0, 1fr) 3.25rem;
+  display: flex;
   align-items: center;
-  gap: var(--hm-space-xs) var(--hm-space-sm);
-  padding-block: var(--hm-space-md);
+  gap: var(--hm-space-xs);
+  padding-block: 0.375rem;
   border-bottom: 1px solid var(--hm-rule);
+  min-width: 0;
+  transition: color var(--hm-dur-micro) var(--hm-ease-out);
 }
 /* Brand marks arrive from src/data/skills.jsx at 32px in their own brand
    colours. This page spends exactly one signal ink, so the index sets them
    monochrome and normalises the size — the row, not the logo, is the object.
    These rules are unlayered, so they beat the data file's Tailwind classes. */
 .hm-skill__icon {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   line-height: 0;
 }
 .hm-skill__icon svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.125rem;
+  height: 1.125rem;
   color: var(--hm-ink-2);
   transition: color var(--hm-dur-micro) var(--hm-ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
   .hm-skill:hover .hm-skill__icon svg { color: var(--hm-accent); }
+  .hm-skill:hover .hm-skill__name { color: var(--hm-accent); }
 }
 
 /* Same normalisation for the service marks (src/data/services.jsx ships
@@ -641,22 +654,19 @@ h1, h2, h3, h4 {
 }
 .hm-skill__name {
   font-family: var(--hm-font-body);
-  font-weight: 600;
-  font-size: var(--hm-text-base);
-  letter-spacing: 0;
+  font-weight: 500;
+  font-size: var(--hm-text-sm);
+  letter-spacing: -0.01em;
   margin: 0;
   min-width: 0;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--hm-ink);
+  transition: color var(--hm-dur-micro) var(--hm-ease-out);
 }
-.hm-skill__pct {
-  justify-self: end;
-  font-family: var(--hm-font-display);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--hm-text-sm);
-  font-weight: 500;
-  color: var(--hm-muted);
-}
-.hm-skill__meter { grid-column: 2 / -1; }
+.hm-skill__pct { display: none; }
+.hm-skill__meter { display: none; }
 
 /* ─────────────────────────────────────────────────────────────
    RÉSUMÉ ENTRIES — index rows, no timeline dots, no gradient rail.
@@ -839,17 +849,25 @@ h1, h2, h3, h4 {
 }
 .hm-act:hover { color: var(--hm-accent); border-bottom-color: var(--hm-accent); }
 
-/* Tag — hairline, not a filled pill. */
+/* Tag — hairline with blueish accent highlight */
 .hm-tag {
   font-family: var(--hm-font-display);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--hm-ink-2);
-  border: 1px solid var(--hm-rule);
-  padding: 0.15em 0.5em;
+  color: var(--hm-accent);
+  background: color-mix(in oklab, var(--hm-accent) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--hm-accent) 30%, transparent);
+  padding: 0.18em 0.55em;
   white-space: nowrap;
+  transition: background-color var(--hm-dur-micro) var(--hm-ease-out),
+              border-color var(--hm-dur-micro) var(--hm-ease-out),
+              color var(--hm-dur-micro) var(--hm-ease-out);
+}
+.hm-tag:hover {
+  background: color-mix(in oklab, var(--hm-accent) 18%, transparent);
+  border-color: var(--hm-accent);
 }
 
 /* ─────────────────────────────────────────────────────────────

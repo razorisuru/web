@@ -75,7 +75,7 @@ const ContactSection = ({ theme, id }) => {
               })}
             </dl>
 
-            <ul className="flex flex-wrap gap-6 list-none m-0 p-0">
+            <ul className="flex flex-wrap gap-6 list-none mt-4 m-0 p-0">
               {socials.map((social) => {
                 const Icon = social.icon;
                 return (

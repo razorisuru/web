@@ -1,3 +1,4 @@
+import { FileDown } from "lucide-react";
 import ScrollLink from "./ScrollLink";
 import TypeWriter from "./TypeWriter";
 
@@ -53,6 +54,7 @@ const HeroSection = ({ id }) => {
             <ScrollLink to="#projects" className="hm-chip">
               View Projects
             </ScrollLink>
+            <a className="hm-chip" href="/isuru-bandara-cv.pdf">CV</a>
           </div>
         </div>
 

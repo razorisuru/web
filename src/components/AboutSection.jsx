@@ -3,7 +3,7 @@ import { FiDownload } from "react-icons/fi";
 const facts = [
   { key: "Full Name", value: "Isuru Bandara Weerakoon" },
   { key: "Email", value: "isurubandara318@gmail.com", href: "mailto:isurubandara318@gmail.com" },
-  { key: "Work", value: "SE 360 Productions Group (pvt) Ltd." },
+  { key: "Work", value: "Software Engineer 360 Productions Group (pvt) Ltd." },
   { key: "Location", value: "Colombo, Sri Lanka" },
 ];
 

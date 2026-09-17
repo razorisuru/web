@@ -15,7 +15,9 @@ import {
   SiExpress,
   SiTypescript,
   SiPostgresql,
+  SiDotnet,
 } from "react-icons/si";
+import { TbBrandCSharp } from "react-icons/tb";
 
 export const skills = [
   {
@@ -23,7 +25,7 @@ export const skills = [
     icon: <SiJavascript className="text-yellow-500" size={32} />,
     level: 90,
   },
-   {
+  {
     name: "Typescript",
     icon: <SiTypescript className="text-yellow-500" size={32} />,
     level: 90,
@@ -32,16 +34,6 @@ export const skills = [
     name: "React",
     icon: <FaReact className="text-blue-500" size={32} />,
     level: 95,
-  },
-  {
-    name: "Laravel",
-    icon: <FaLaravel className="text-red-600" size={32} />,
-    level: 95,
-  },
-  {
-    name: "Node.js",
-    icon: <FaNodeJs className="text-green-600" size={32} />,
-    level: 80,
   },
   {
     name: "Next.js",
@@ -55,14 +47,9 @@ export const skills = [
     needsTheme: true,
   },
   {
-    name: "Spring Boot",
-    icon: <FaJava className="text-orange-600" size={32} />,
-    level: 75,
-  },
-  {
-    name: "MySQL",
-    icon: <SiMysql className="text-blue-700" size={32} />,
-    level: 78,
+    name: "Node.js",
+    icon: <FaNodeJs className="text-green-600" size={32} />,
+    level: 80,
   },
   {
     name: "Express.js",
@@ -76,19 +63,9 @@ export const skills = [
     needsTheme: true,
   },
   {
-    name: "Tailwind CSS",
-    icon: <SiTailwindcss className="text-cyan-500" size={32} />,
-    level: 92,
-  },
-  {
-    name: "UI/UX Design",
-    icon: <FaFigma className="text-purple-500" size={32} />,
-    level: 88,
-  },
-  {
-    name: "MongoDB",
-    icon: <SiMongodb className="text-green-500" size={32} />,
-    level: 75,
+    name: "Laravel",
+    icon: <FaLaravel className="text-red-600" size={32} />,
+    level: 95,
   },
   {
     name: "Python",
@@ -96,8 +73,43 @@ export const skills = [
     level: 70,
   },
   {
+    name: "C#",
+    icon: <TbBrandCSharp className="text-purple-600" size={32} />,
+    level: 80,
+  },
+  {
+    name: "DotNet",
+    icon: <SiDotnet className="text-blue-600" size={32} />,
+    level: 80,
+  },
+  {
+    name: "Spring Boot",
+    icon: <FaJava className="text-orange-600" size={32} />,
+    level: 75,
+  },
+  {
+    name: "Tailwind CSS",
+    icon: <SiTailwindcss className="text-cyan-500" size={32} />,
+    level: 92,
+  },
+  {
+    name: "MySQL",
+    icon: <SiMysql className="text-blue-700" size={32} />,
+    level: 78,
+  },
+  {
     name: "Postgresql",
     icon: <SiPostgresql className="text-blue-400" size={32} />,
     level: 70,
+  },
+  {
+    name: "MongoDB",
+    icon: <SiMongodb className="text-green-500" size={32} />,
+    level: 75,
+  },
+  {
+    name: "UI/UX Design",
+    icon: <FaFigma className="text-purple-500" size={32} />,
+    level: 88,
   },
 ];
